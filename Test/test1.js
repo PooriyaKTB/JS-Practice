@@ -489,6 +489,15 @@ const game = {
   },
 };
 
+// const playerNames = game.scored.entries();
+// for (const [i, playName] of playerNames) console.log(`Goal ${i +1}: ${playName}`);
+
+const scorers2 = {};
+for (const i of game.scored) {
+  scorers2[i] ? scorers2[i]++ : scorers2[i] = 1;
+}
+console.log(scorers2);
+
 // for (const [el , nameP] of Object.entries(game.scored)) console.log(`Goal ${Number(el)+1}: ${nameP}`);
 // for (const [goalInd, playerName] of game.scored.entries() ) console.log(`Goal ${goalInd+1}: ${playerName}`);
 
@@ -500,7 +509,8 @@ total /= Object.keys(game.odds).length
 
 for (const [teamName , oddOfWin] of Object.entries(game.odds)){
   const msg = teamName === 'x' ? 'Draw' : game[teamName];
-  console.log(`Odd of victory ${msg} ${oddOfWin}`)};
+  console.log(`Odd of victory ${msg} ${oddOfWin}`)
+  };
 
 
 
