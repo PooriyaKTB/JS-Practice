@@ -159,5 +159,14 @@ const mexicanFoods2 = new Set ([
   'garlic'
 ])
 
-console.log([...italianFoods2.intersection(mexicanFoods2)]); ;
+// console.log([...italianFoods2.intersection(mexicanFoods2)]);
 
+const comb = [...italianFoods2].concat([...mexicanFoods2]);
+const uniqueComb = new Set(comb);
+console.log([...uniqueComb]);
+
+const comb2 = [...italianFoods2, ...mexicanFoods2];
+const uniqueComb2 = new Set(comb2);
+console.log([...uniqueComb2]);
+
+console.log([...italianFoods2.union(mexicanFoods2)]);
