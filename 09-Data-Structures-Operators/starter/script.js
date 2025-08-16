@@ -140,3 +140,24 @@ const maskCreditCard = function (creditCardNumber) {
 }
 
 // console.log(maskCreditCard(657483927 3647823));
+
+const italianFoods2 = new Set ([
+  'pasta',
+  'gnocchi',
+  'tomatoes',
+  'olive oil',
+  'garlic',
+  'basil'
+])
+
+const mexicanFoods2 = new Set ([
+  'tortillas',
+  'beans',
+  'rice',
+  'tomatoes',
+  'avocado',
+  'garlic'
+])
+
+console.log([...italianFoods2.intersection(mexicanFoods2)]); ;
+
