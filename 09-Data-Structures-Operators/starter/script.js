@@ -1,27 +1,4 @@
 'use strict';
-
-// Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-
-const italianFoods = new Set([
-  'pasta',
-  'gnocchi',
-  'tomatoes',
-  'olive oil',
-  'garlic',
-  'basil',
-]);
-
-const mexicanFoods = new Set([
-  'tortillas',
-  'beans',
-  'rice',
-  'tomatoes',
-  'avocado',
-  'garlic',
-]);
-
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -45,3 +22,121 @@ const restaurant = {
     },
   },
 };
+
+const { QUERY_STR } = require('firebase/data-connect');
+
+// Data needed for a later exercise
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+const italianFoods = new Set([
+  'pasta',
+  'gnocchi',
+  'tomatoes',
+  'olive oil',
+  'garlic',
+  'basil',
+]);
+
+const mexicanFoods = new Set([
+  'tortillas',
+  'beans',
+  'rice',
+  'tomatoes',
+  'avocado',
+  'garlic',
+]);
+
+for (const ing of italianFoods) {
+  // if (mexicanFoods.has(ing)) console.log(ing);
+}
+
+const similarElements = italianFoods.intersection(mexicanFoods);
+// console.log(similarElements);
+// console.log([...similarElements]);
+
+const question = new Map([
+  ['Question', 'what is the best programing langauge?'],
+  [1, 'Java'],
+  [2, 'C'],
+  [3, 'JavaScript'],
+  ['Answer', 3],
+  [true, 'Correct!'],
+  [false, 'Try Again!'],
+]);
+
+// console.log(question.get('Question'));
+for (const [key, value] of question) {
+  // if (typeof key === 'number') console.log(`${key}: ${value}`);
+}
+// const userAnswer = Number(prompt('your answer'));
+const userAnswer = 3;
+// console.log(question.get(userAnswer === question.get('Answer')));
+
+// CHALLENGE4 ----------------------------------------------
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
+gameEvents.delete(64);
+// console.log(gameEvents);
+
+const lastEvent = [...gameEvents.keys()].pop();
+// console.log(`An event happened, on average, every ${lastEvent / gameEvents.size} minutes.`);
+
+for (const [time, event] of gameEvents) {
+  // console.log((time < 45) ? `[First Half] ${time}: ${event}` : `[Sconde Half] ${time}: ${event}`);
+}
+// ---------------------------------------------------------
+
+const airline = 'TAP air portugal';
+const plane = 'A320';
+
+const checkMidSeat = function (seat) {
+  if (seat.slice(-1).toLowerCase() === 'b' || seat.slice(-1).toLowerCase() === 'e') return `${seat} is Middle Seat`
+  return `${seat} is Not Middle Seat`
+}
+
+// console.log(checkMidSeat('2b'));
+
+const passengerName = 'pOoRiYA'
+
+const corretName = function (passengerName){
+  return passengerName[0].toUpperCase() + passengerName.slice(1).toLowerCase()
+}
+
+// console.log(corretName(passengerName));
+
+const capitalizer = function(name){
+  const names = name.split(' ')
+  const capNames=[]
+  for (const n of names) capNames.push(n.replace(n[0], n[0].toUpperCase()))
+  // for (const n of names) capNames.push(n[0].toUpperCase() + n.slice(1))
+  const capName = capNames.join(' ')
+  return capName
+}
+
+const passenger = 'jessica ann smith davis'
+// console.log(capitalizer(passenger));
+
+const maskCreditCard = function (creditCardNumber) {
+  // const strNumber = String(creditCardNumber)
+  const strNumber = creditCardNumber + ''
+  const lastFour = strNumber.slice(-4)
+  return lastFour.padStart(strNumber.length, '*')
+}
+
+// console.log(maskCreditCard(657483927 3647823));
