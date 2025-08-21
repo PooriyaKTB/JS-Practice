@@ -1,5 +1,5 @@
 'use strict';
-// Data needed for first part of the section
+/* // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -88,6 +88,24 @@ const gameEvents = new Map([
   [92, '🔶 Yellow card'],
 ]);
 
+const eventss = [...new Set(gameEvents.values())];
+console.log(eventss);
+
+gameEvents.delete(64);
+console.log(gameEvents);
+
+console.log(`An event happened, on every ${90/gameEvents.size} minutes.`);
+
+for (const [key,value] of gameEvents) {
+  console.log((key < 45) ? `[First Half] ${key}: ${value}` : `[Second Half] ${key}: ${value}`);
+}
+
+
+
+
+
+
+
 const events = [...new Set(gameEvents.values())];
 // console.log(events);
 
@@ -163,10 +181,53 @@ const mexicanFoods2 = new Set ([
 
 const comb = [...italianFoods2].concat([...mexicanFoods2]);
 const uniqueComb = new Set(comb);
-console.log([...uniqueComb]);
+// console.log([...uniqueComb]);
 
 const comb2 = [...italianFoods2, ...mexicanFoods2];
 const uniqueComb2 = new Set(comb2);
-console.log([...uniqueComb2]);
+// console.log([...uniqueComb2]);
 
-console.log([...italianFoods2.union(mexicanFoods2)]);
+// console.log([...italianFoods2.union(mexicanFoods2)])
+ */
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+// const text = document.querySelector('textarea').value;
+
+// function camelCase(data) {
+  //   const [first, second] = data
+  //     .toLowerCase()
+  //     .trim()
+  //     .replace('/n', '')
+  //     .replace('_', ' ')
+  //     .split(' ');
+  //   // const upperSecond = second[0].toUpperCase() + second.slice(1);
+  //   const upperSecond = second.replace(second[0], second[0].toUpperCase());
+  //   const result = [first, upperSecond].join('');
+  //   return console.log(result);
+  // }
+  // console.log('---------------------------------');
+  // camelCase('under_score');
+  // camelCase('first_name');
+  // camelCase('Some_Variable');
+  // camelCase('calculate_AGE');
+  // camelCase('delayed_depature');
+  
+  
+document.querySelector('button').addEventListener('click', function(){
+  const text = document.querySelector('textarea').value;
+  const eachLine = text.split('\n');
+  let count = 1
+  const finalised = []
+  for (const line of eachLine){
+    const eachWord = line.toLowerCase().trim().split('_')
+    const capitalWord = eachWord[0].concat(eachWord[1].replace(eachWord[1][0], eachWord[1][0].toUpperCase()))
+    const padded = capitalWord.padEnd(20,' ')
+    const result = finalised.push(padded + ('✅'.repeat(count))) 
+    count++
+  }
+  return console.log(finalised.join('\n'));
+});
+// function toCamelCase(){
+
+// console.log('---------------------------------');
+// console.log(toCamelCase('under_score\n   first_name\nSome_Variable\n        calculate_AGE\ndelayed_depature')); ;
