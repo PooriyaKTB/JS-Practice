@@ -194,25 +194,25 @@ document.body.append(document.createElement('button'));
 // const text = document.querySelector('textarea').value;
 
 // function camelCase(data) {
-  //   const [first, second] = data
-  //     .toLowerCase()
-  //     .trim()
-  //     .replace('/n', '')
-  //     .replace('_', ' ')
-  //     .split(' ');
-  //   // const upperSecond = second[0].toUpperCase() + second.slice(1);
-  //   const upperSecond = second.replace(second[0], second[0].toUpperCase());
-  //   const result = [first, upperSecond].join('');
-  //   return console.log(result);
-  // }
-  // console.log('---------------------------------');
-  // camelCase('under_score');
-  // camelCase('first_name');
-  // camelCase('Some_Variable');
-  // camelCase('calculate_AGE');
-  // camelCase('delayed_depature');
-  
-  
+//   const [first, second] = data
+//     .toLowerCase()
+//     .trim()
+//     .replace('/n', '')
+//     .replace('_', ' ')
+//     .split(' ');
+//   // const upperSecond = second[0].toUpperCase() + second.slice(1);
+//   const upperSecond = second.replace(second[0], second[0].toUpperCase());
+//   const result = [first, upperSecond].join('');
+//   return console.log(result);
+// }
+// console.log('---------------------------------');
+// camelCase('under_score');
+// camelCase('first_name');
+// camelCase('Some_Variable');
+// camelCase('calculate_AGE');
+// camelCase('delayed_depature');
+
+/*   
 document.querySelector('button').addEventListener('click', function(){
   const text = document.querySelector('textarea').value;
   const eachLine = text.split('\n');
@@ -221,11 +221,24 @@ document.querySelector('button').addEventListener('click', function(){
   for (const line of eachLine){
     const eachWord = line.toLowerCase().trim().split('_')
     const capitalWord = eachWord[0].concat(eachWord[1].replace(eachWord[1][0], eachWord[1][0].toUpperCase()))
-    const padded = capitalWord.padEnd(20,' ')
-    const result = finalised.push(padded + ('✅'.repeat(count))) 
+    const result = finalised.push(capitalWord.padEnd(20,' ') + ('✅'.repeat(count))) 
     count++
   }
   return console.log(finalised.join('\n'));
+});
+ */
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const eachLine = text.split('\n');
+  for (const [indx, line] of eachLine.entries()) {
+    const [first, second] = line.toLowerCase().trim().split('_');
+    const capitalWord = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`; //eachWord[0].concat(eachWord[1].replace(eachWord[1][0], eachWord[1][0].toUpperCase()))
+    console.log(`${capitalWord.padEnd(20)}${'✅'.repeat(indx + 1)}`);
+  }
 });
 // function toCamelCase(){
 
