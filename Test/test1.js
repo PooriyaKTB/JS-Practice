@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 //----------------------Exercise S44---------------------
 
 /*const jonas = {
@@ -568,7 +568,7 @@ const namess = new Set(["pooriya", "ali", "sara", "pooriya"]);
 namess.add("mamad");
 // console.log(namess);
 
-const mapp = new Map([
+/* const mapp = new Map([
   ["names", ["pooriya", "mamad"]],
   ["age", 30],
   ["job", "developer"],
@@ -582,6 +582,7 @@ console.log("-------------------");
 for (const keys of mapp) {
   // console.log(keys);
 }
+ */
 /* 
 console.log(mapp.delete('job'));
 console.log(mapp)
@@ -639,7 +640,7 @@ const myName = 'Pooriya'
 console.log(myName.split("").join(" * "));
 console.log(myName.slice(-3));
  */
-
+/* 
 function camelCase(input) {
   const normalised = input.toLowerCase().trim().replace("_", " ").split(" ");
   const upper = normalised[1][0].toUpperCase();
@@ -652,3 +653,7 @@ camelCase("first_name");
 camelCase("some_Variable");
 camelCase("calculate_AGE");
 camelCase("delayed_depature");
+ */
+
+// -------------------------------------- Section 10 --------------------------------------------------
+
