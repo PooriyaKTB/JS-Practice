@@ -496,7 +496,7 @@ const game = {
 
 const scorers2 = {};
 for (const i of game.scored) {
-  scorers2[i] ? scorers2[i]++ : scorers2[i] = 1;
+  scorers2[i] ? scorers2[i]++ : (scorers2[i] = 1);
 }
 // console.log(scorers2);
 
@@ -504,20 +504,19 @@ for (const i of game.scored) {
 // for (const [goalInd, playerName] of game.scored.entries() ) console.log(`Goal ${goalInd+1}: ${playerName}`);
 
 let total = 0;
-for (const i of Object.values(game.odds)) 
-  total += i;
-total /= Object.keys(game.odds).length
+for (const i of Object.values(game.odds)) total += i;
+total /= Object.keys(game.odds).length;
 // console.log(total);
 
-for (const [teamName , oddOfWin] of Object.entries(game.odds)){
-  const msg = teamName === 'x' ? 'Draw' : game[teamName];
+for (const [teamName, oddOfWin] of Object.entries(game.odds)) {
+  const msg = teamName === "x" ? "Draw" : game[teamName];
   // console.log(`Odd of victory ${msg} ${oddOfWin}`)
-  };
-
-
+}
 
 // -------1-------
-const {players: [players1, players2]} = game;
+const {
+  players: [players1, players2],
+} = game;
 
 // const [players1, players2] = game.players;
 
@@ -535,7 +534,9 @@ const players1Final = [...players1, "Thiago", "Coutinho", "Prisic"];
 
 // -------5-------
 
-const {odds: { team1, x: draw, team2 }} = game;
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
 // console.log(`team-1 is ${team1} and draw is ${draw} then team-2 is ${team2}`);
 
 // ------6--------
@@ -561,6 +562,93 @@ const printGoals = function (...player) {
   console.log(game.odds.key);
 } */
 
+const namess = new Set(["pooriya", "ali", "sara", "pooriya"]);
+// console.log(...namess);
 
-  const namess = new Set(['pooriya', 'ali', 'sara', 'pooriya']);
-  console.log(...namess);
+namess.add("mamad");
+// console.log(namess);
+
+const mapp = new Map([
+  ["names", ["pooriya", "mamad"]],
+  ["age", 30],
+  ["job", "developer"],
+]);
+console.log(mapp.get("names"));
+// mapp.set('names', 'ali');
+// console.log(mapp.get('names'));
+// console.log(mapp.size);
+for (const keys of mapp.entries()) console.log(...keys);
+console.log("-------------------");
+for (const keys of mapp) {
+  // console.log(keys);
+}
+/* 
+console.log(mapp.delete('job'));
+console.log(mapp)
+ */
+
+const quiz = new Map([
+  ["Question", "What is the best programming language?"],
+  [1, "Java"],
+  [2, "C"],
+  [3, "JavaScript"],
+  ["Answer", 3],
+  [true, "Correct!"],
+  [false, "Try Again!"],
+]);
+
+/* console.log(quiz.get('Question'));
+for (const [key, value] of quiz) {
+  if (typeof key === 'number') console.log(`${key}: ${value}`);
+}
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+readline.question('Your answer: ', (userAnswer) => {
+  const answer = Number(userAnswer);
+  console.log(answer === quiz.get('Answer'));
+  readline.close();})
+ */
+
+const MarkMiller = {
+  fullName: "Mark Miller",
+  mass: 78,
+  height: 1.69,
+  calcBMI(mass, height) {
+    return this.mass / (this.height * this.height);
+  },
+};
+const JohnSmith = {
+  fullName: "John Smith",
+  mass: 92,
+  height: 1.95,
+  calcBMI(mass, height) {
+    return this.mass / (this.height * this.height);
+  },
+};
+
+const markBMI = MarkMiller.calcBMI();
+const johnBMI = JohnSmith.calcBMI();
+// console.log(markBMI)
+// console.log(johnBMI)
+// console.log(markBMI > johnBMI ? `${MarkMiller.fullName} BMI (${markBMI}) is higher than ${JohnSmith}'s (${johnBMI}).` : `${JohnSmith.fullName} BMI (${johnBMI}) is higher than ${MarkMiller}'s (${markBMI}).`);
+
+/* 
+const myName = 'Pooriya'
+console.log(myName.split("").join(" * "));
+console.log(myName.slice(-3));
+ */
+
+function camelCase(input) {
+  const normalised = input.toLowerCase().trim().replace("_", " ").split(" ");
+  const upper = normalised[1][0].toUpperCase();
+  const result = upper.join('')
+  console.log(result);
+}
+
+camelCase("under_score");
+camelCase("first_name");
+camelCase("some_Variable");
+camelCase("calculate_AGE");
+camelCase("delayed_depature");
