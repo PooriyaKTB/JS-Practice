@@ -260,16 +260,26 @@ const flights =
 //              Arrival from BRU to FAO (11h45)
 //    Delayed Arrival from HEL to FAO (12h05)
 //            Departure from FAO to LIS (12h30)
+/* 
+function formating(text) {
+  const cleanUp = text.split('+');
+  for (const line of cleanUp) {
+    const [event, from, to, time] = line.split(';');
+    const finalEvent = event.replaceAll('_', ' ').includes('Delayed') ? '🔴'.concat(event).padStart(20) : event.padStart(20);
+    const finalFrom = from.toUpperCase().slice(0, 3);
+    const finalTo = to.toUpperCase().slice(0, 3);
+    const finalTime = time.replace(':', 'h');
+    console.log(`${finalEvent} from ${finalFrom} to ${finalTo} (${finalTime})`);
+  }
+}
+formating(flights);
+ */
 
 function formating(text) {
   const cleanUp = text.split('+');
   for (const line of cleanUp) {
     const [event, from, to, time] = line.split(';');
-    const finalEvent = event.includes('Delayed') ? '🔴'.concat(event.replaceAll('_', ' ')).padStart(20) : event.replaceAll('_', " ").padStart(20);
-    const finalFrom = from.toUpperCase().slice(0, 3);
-    const finalTo = to.toUpperCase().slice(0, 3);
-    const finalTime = time.replace(':', 'h');
-    console.log(`${finalEvent} from ${finalFrom} to ${finalTo} (${finalTime})`);
+    console.log(`${event.startsWith('_Delayed')? "🔴":''} ${event.replaceAll('_', ' ')} from ${from.toUpperCase().slice(0, 3)} to ${to.toUpperCase().slice(0, 3)} (${time.replace(':', 'h')})`.padStart(50));
   }
 }
 formating(flights);
