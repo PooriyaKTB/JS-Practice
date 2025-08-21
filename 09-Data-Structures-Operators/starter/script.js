@@ -189,6 +189,9 @@ const uniqueComb2 = new Set(comb2);
 
 // console.log([...italianFoods2.union(mexicanFoods2)])
  */
+
+/* 
+---------------------------------------------------------------------------------
 document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
 // const text = document.querySelector('textarea').value;
@@ -212,7 +215,7 @@ document.body.append(document.createElement('button'));
 // camelCase('calculate_AGE');
 // camelCase('delayed_depature');
 
-/*   
+   
 document.querySelector('button').addEventListener('click', function(){
   const text = document.querySelector('textarea').value;
   const eachLine = text.split('\n');
@@ -226,7 +229,7 @@ document.querySelector('button').addEventListener('click', function(){
   }
   return console.log(finalised.join('\n'));
 });
- */
+
 
 document.querySelector('button').addEventListener('click', function () {
   const text = document.querySelector('textarea').value;
@@ -244,3 +247,29 @@ document.querySelector('button').addEventListener('click', function () {
 
 // console.log('---------------------------------');
 // console.log(toCamelCase('under_score\n   first_name\nSome_Variable\n        calculate_AGE\ndelayed_depature')); ;
+//---------------------------------------------------------------------------------
+*/
+
+///////////////////////////////////////
+// String Methods Practice
+
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//    Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+function formating(text) {
+  const cleanUp = text.split('+');
+  for (const line of cleanUp) {
+    const [event, from, to, time] = line.split(';');
+    const finalEvent = event.includes('Delayed') ? '🔴'.concat(event.replaceAll('_', ' ')).padStart(20) : event.replaceAll('_', " ").padStart(20);
+    const finalFrom = from.toUpperCase().slice(0, 3);
+    const finalTo = to.toUpperCase().slice(0, 3);
+    const finalTime = time.replace(':', 'h');
+    console.log(`${finalEvent} from ${finalFrom} to ${finalTo} (${finalTime})`);
+  }
+}
+formating(flights);
