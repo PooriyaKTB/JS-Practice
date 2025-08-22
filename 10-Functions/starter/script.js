@@ -40,25 +40,26 @@ const poll = {
   registerNewAnswer() {
     const userAnswer = Number(prompt(`${this.question}\n${(this.options).join('\n')}\nEnter only option number!`))+1;
 
-    userAnswer && userAnswer >= 1 && userAnswer <= 4
+    // typeOf(userAnswer) === 'number' && userAnswer < this.answers.length && this.answers[userAnswer]++;
+    userAnswer && typeof(userAnswer) === 'number' && userAnswer >= 1 && userAnswer <= 4
       ? this.answers[userAnswer-1]++
       : alert(`Not correct input`);
 
     const userType = prompt('type?');
 
-    this.displayResult(userType, this.answers);
+    this.displayResult(userType);
   },
-  displayResult(type = 'string', answers = this.answers) {
+  displayResult(type = 'string') {
     const enteredType = String(type.toLocaleLowerCase())
     if (enteredType === 'string') {
-      console.log(`Poll results are:'\n${answers.join(',')}`);
-      alert(`Poll results are:\n${answers.join(',')}`);
+      console.log(`Poll results are:\n${this.answers.join(', ')}`);
+      alert(`Poll results are:\n${this.answers.join(', ')}`);
     } else if (enteredType === 'array') {
-      console.log(answers);
-      alert(answers);
+      console.log(this.answers);
+      alert(this.answers);
     } else {
-      alert(`Entered type is not valid, here is result in string type:\n${answers}`);
-      console.log(answers);
+      alert(`Entered type is not valid, here is result in string type:\n${this.answers}`);
+      console.log(this.answers);
     }
   },
 };
@@ -70,6 +71,9 @@ document
 const Data1 = [5, 2, 3];
 const Data2 = [1, 5, 3, 9, 6, 1];
 const functi = poll.displayResult;
+functi.call({answers: Data1}, 'string')
+functi.call({answers: Data2}, 'string')
+
 /* 
 functi.call(poll, 'string', Data1)
 functi.call(poll, 'string', Data2)
