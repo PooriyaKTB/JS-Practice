@@ -658,7 +658,7 @@ camelCase("delayed_depature");
 // -------------------------------------- Section 10 --------------------------------------------------
 
 // -------------------------------------- Section 11 --------------------------------------------------
-
+/* 
 // Data 1:
 const julia = [3, 5, 2, 12, 7];
 const kate = [4, 1, 15, 8, 3];
@@ -674,15 +674,33 @@ function checkDogs(julia, kate) {
   // const correctJulia = julia.slice(1,-2);
   
   const allDogs = correctJulia.concat(kate);
-
+  
   allDogs.forEach((dogAge, i) =>
     dogAge >= 3
-      ? console.log(
-          `Dog number ${i + 1} is an adult, and is ${dogAge} years old.`
-        )
-      : console.log(`Dog number ${i + 1} is stil a puupy.`)
-  );
-}
-checkDogs(julia, kate);
-console.log("----------------------------------");
-checkDogs(julia2, kate2);
+  ? console.log(
+    `Dog number ${i + 1} is an adult, and is ${dogAge} years old.`
+    )
+    : console.log(`Dog number ${i + 1} is stil a puupy.`)
+    );
+    }
+    checkDogs(julia, kate);
+    console.log("----------------------------------");
+    checkDogs(julia2, kate2);
+    */
+
+// ------------------------------------- Section 11 - 157 ----------------------------------------------
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const rate = 1.1;
+const mov = movements.map((move) => move * rate);
+console.log(mov);
+
+const strMov = movements.map((mov, i, arr) => 
+  /* 
+  mov > 0
+    ? `Movment ${i + 1}: You diposited ${mov}`
+    : `Movment ${i + 1}: You withdrew ${Math.abs(mov)}`
+ */
+  `Movment ${i+1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+);
+console.log(strMov);
