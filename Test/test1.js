@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 //----------------------Exercise S44---------------------
 
 /*const jonas = {
@@ -657,3 +657,32 @@ camelCase("delayed_depature");
 
 // -------------------------------------- Section 10 --------------------------------------------------
 
+// -------------------------------------- Section 11 --------------------------------------------------
+
+// Data 1:
+const julia = [3, 5, 2, 12, 7];
+const kate = [4, 1, 15, 8, 3];
+// Data 2:
+const julia2 = [9, 16, 6, 8, 3];
+const kate2 = [10, 5, 6, 1, 4];
+
+function checkDogs(julia, kate) {
+  const correctJulia = julia.slice();
+  correctJulia.splice(0, 1);
+  correctJulia.splice(-2);
+  //OR
+  // const correctJulia = julia.slice(1,-2);
+  
+  const allDogs = correctJulia.concat(kate);
+
+  allDogs.forEach((dogAge, i) =>
+    dogAge >= 3
+      ? console.log(
+          `Dog number ${i + 1} is an adult, and is ${dogAge} years old.`
+        )
+      : console.log(`Dog number ${i + 1} is stil a puupy.`)
+  );
+}
+checkDogs(julia, kate);
+console.log("----------------------------------");
+checkDogs(julia2, kate2);
