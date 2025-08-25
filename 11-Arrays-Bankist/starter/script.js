@@ -35,6 +35,20 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+const createUsername = function (acc) {
+  acc.forEach(function (user) {
+    user.ownerUserName = user.owner
+      .toLowerCase()
+      .split(' ')
+      .map(userName => userName[0])
+      .join('');
+  });
+  // return acc
+};
+createUsername(accounts);
+// console.log(accounts);
+// console.log(createUsername(accounts));
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -61,16 +75,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-
 const displayMovements = function (movements) {
-  containerMovements.innerHTML = ''
+  containerMovements.innerHTML = '';
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
-    <div class="movements__type movements__type--${type}">${
-      i + 1
-    }:${type}</div>
+    <div class="movements__type movements__type--${type}">${i + 1}:${type}</div>
     <div class="movements__date">Date comes soon</div>
     <div class="movements__value">${mov}£</div>
     </div>
@@ -91,5 +102,21 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* 
+const rate = 1.1;
+const mov = movements.map(move => move * rate);
+console.log(mov);
 
+const strMov = movements.map(
+  (mov, i, arr) =>
+    //  mov > 0
+    //  ? `Movment ${i + 1}: You diposited ${mov}`
+    //  : `Movment ${i + 1}: You withdrew ${Math.abs(mov)}`
+
+    `Movment ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(strMov);
+ */
 /////////////////////////////////////////////////
