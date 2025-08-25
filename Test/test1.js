@@ -707,14 +707,24 @@ const strMov = movements.map((mov, i, arr) =>
   */
 
 // ------------------------------------- Section 11 - 159 ----------------------------------------------
+
 /* 
 const withdrawals = movements.filter((mov) => mov < 0);
 console.log(withdrawals);
  */
+
 // ------------------------------------- Section 11 - 160 ----------------------------------------------
 
+/* 
 const globalBalance = movements.reduce(function (bal, mov, i) {
   console.log(`${i}: ${mov}`);
   return bal + mov;
-}, 0);
-console.log(globalBalance);
+  }, 0);
+  console.log(globalBalance);
+  */
+
+const maximumValue = movements.reduce((acc, mov) => mov > acc ? mov : acc, movements[0]);
+
+console.log(maximumValue);
+
+// ------------------------------------- Section 11 - 161 ----------------------------------------------
