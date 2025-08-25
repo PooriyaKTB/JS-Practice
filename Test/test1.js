@@ -713,5 +713,8 @@ console.log(withdrawals);
  */
 // ------------------------------------- Section 11 - 160 ----------------------------------------------
 
-const globalBalance = movements.reduce((bal, mov) => bal + mov, 0);
+const globalBalance = movements.reduce(function (bal, mov, i) {
+  console.log(`${i}: ${mov}`);
+  return bal + mov;
+}, 0);
 console.log(globalBalance);
