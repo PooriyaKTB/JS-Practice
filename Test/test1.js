@@ -689,18 +689,24 @@ function checkDogs(julia, kate) {
     */
 
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
-
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* 
 const rate = 1.1;
 const mov = movements.map((move) => move * rate);
 console.log(mov);
 
 const strMov = movements.map((mov, i, arr) => 
-  /* 
-  mov > 0
-    ? `Movment ${i + 1}: You diposited ${mov}`
-    : `Movment ${i + 1}: You withdrew ${Math.abs(mov)}`
- */
+  
+  // mov > 0
+  //   ? `Movment ${i + 1}: You diposited ${mov}`
+  //   : `Movment ${i + 1}: You withdrew ${Math.abs(mov)}`
+  
   `Movment ${i+1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
-);
-console.log(strMov);
+  );
+  console.log(strMov);
+  */
+
+// ------------------------------------- Section 11 - 159 ----------------------------------------------
+
+const withdrawals = movements.filter((mov) => mov < 0);
+console.log(withdrawals);
