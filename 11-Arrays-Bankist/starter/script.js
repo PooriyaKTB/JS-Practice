@@ -35,20 +35,6 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
-const createUsername = function (acc) {
-  acc.forEach(function (user) {
-    user.ownerUserName = user.owner
-      .toLowerCase()
-      .split(' ')
-      .map(userName => userName[0])
-      .join('');
-  });
-  // return acc
-};
-createUsername(accounts);
-// console.log(accounts);
-// console.log(createUsername(accounts));
-
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -77,8 +63,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
+  //OR .tetxtContent = 0
+
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
     const html = `
     <div class="movements__row">
     <div class="movements__type movements__type--${type}">${i + 1}:${type}</div>
@@ -86,10 +75,33 @@ const displayMovements = function (movements) {
     <div class="movements__value">${mov}£</div>
     </div>
     `;
+
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
+
 displayMovements(account1.movements);
+
+const calcDisplayBalance = function (account) {
+  const balance = account.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance}€`;
+};
+
+calcDisplayBalance(account1);
+
+const createUsername = function (acc) {
+  acc.forEach(function (user) {
+    user.ownerUserName = user.owner
+      .toLowerCase()
+      .split(' ')
+      .map(userName => userName[0])
+      .join('');
+  });
+  // return acc
+};
+createUsername(accounts);
+// console.log(accounts);
+// console.log(createUsername(accounts));
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
