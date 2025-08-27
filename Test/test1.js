@@ -658,6 +658,7 @@ camelCase("delayed_depature");
 // -------------------------------------- Section 10 --------------------------------------------------
 
 // -------------------------------------- Section 11 --------------------------------------------------
+// -------------------------------------- Lecture 155 --------------------------------------------------
 /* 
 // Data 1:
 const julia = [3, 5, 2, 12, 7];
@@ -687,6 +688,25 @@ function checkDogs(julia, kate) {
     console.log("----------------------------------");
     checkDogs(julia2, kate2);
     */
+// -------------------------------------- Lecture 155 --------------------------------------------------
+
+const calcAverageHumanAge = function (dogAge) {
+  const dogToHumanAge = dogAge.map((age) =>
+    age <= 2 ? 2 * age : 16 + age * 4
+  );
+  // console.log(dogToHumanAge);
+  const adultDogs = dogToHumanAge.filter((el) => el >= 18);
+  // console.log(adultDogs);
+  const averageHumanAge =
+    // adultDogs.reduce((acc, age) => (acc += age), 0) / adultDogs.length;
+    adultDogs.reduce((acc, age, i, arr) => (acc += age / arr.length), 0);
+  // console.log(averageHumanAge);
+  return averageHumanAge;
+};
+
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+console.log("--------------------------------------");
+console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -721,10 +741,10 @@ const globalBalance = movements.reduce(function (bal, mov, i) {
   return bal + mov;
   }, 0);
   console.log(globalBalance);
-  */
-
-const maximumValue = movements.reduce((acc, mov) => mov > acc ? mov : acc, movements[0]);
-
-console.log(maximumValue);
+  
+  const maximumValue = movements.reduce((acc, mov) => mov > acc ? mov : acc, movements[0]);
+  
+  console.log(maximumValue);
+*/
 
 // ------------------------------------- Section 11 - 161 ----------------------------------------------
