@@ -688,7 +688,9 @@ function checkDogs(julia, kate) {
     console.log("----------------------------------");
     checkDogs(julia2, kate2);
     */
+
 // -------------------------------------- Lecture 155 --------------------------------------------------
+
 /* 
 const calcAverageHumanAge = function (dogAge) {
   const dogToHumanAge = dogAge.map((age) =>
@@ -708,7 +710,23 @@ console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 console.log("--------------------------------------");
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
  */
+
+// ------------------------------------- Section 11 - 163 ----------------------------------------------
+
+
+const calcAverageHumanAge2 = (dogAge) =>
+  dogAge
+    .map((age) => (age <= 2 ? age * 2 : 16 + age * 4))
+    .filter((age) => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+console.log(calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]));
+console.log("--------------------------------------");
+console.log(calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]));
+
+
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
+
 /* 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const rate = 1.1;
@@ -749,6 +767,7 @@ const globalBalance = movements.reduce(function (bal, mov, i) {
 
 // ------------------------------------- Section 11 - 162 ----------------------------------------------
 
+/* 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const eurToUsd = 1.1
@@ -761,5 +780,6 @@ const allDepositeInUSD = function (movements) {
 
 const test = allDepositeInUSD(movements);
 console.log(test);
+ */
 
-// ------------------------------------- Section 11 - 16 ----------------------------------------------
+// ------------------------------------- Section 11 - 163 ----------------------------------------------
