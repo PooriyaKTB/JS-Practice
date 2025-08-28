@@ -61,11 +61,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (acc) {
   containerMovements.innerHTML = '';
   //OR .tetxtContent = 0
 
-  movements.forEach(function (mov, i) {
+  acc.movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -80,13 +80,13 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+// (displayMovements(account1));
 
 const calcDisplayBalance = function (account) {
   const balance = account.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance}£`;
 };
-calcDisplayBalance(account1);
+// calcDisplayBalance(account1);
 
 const calcDisplaySummary = function (account) {
   const incomes = account.movements
@@ -102,11 +102,12 @@ const calcDisplaySummary = function (account) {
   // const interest = incomes * account.interestRate/100;
   const interest = account.movements
     .filter(mov => mov > 0)
-    .map(income => income * account.interestRate/100).filter(inc => inc >= 1)
-    .reduce((acc, inc) => acc + inc,0);
+    .map(income => (income * account.interestRate) / 100)
+    .filter(inc => inc >= 1)
+    .reduce((acc, inc) => acc + inc, 0);
   labelSumInterest.textContent = `${interest}£`;
 };
-calcDisplaySummary(account1);
+// calcDisplaySummary(account1);
 
 const createUsername = function (acc) {
   acc.forEach(function (user) {
@@ -121,6 +122,29 @@ const createUsername = function (acc) {
 createUsername(accounts);
 // console.log(accounts);
 // console.log(createUsername(accounts));
+
+let loggedAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  loggedAccount = accounts.find(
+    acc => acc.ownerUserName === inputLoginUsername.value
+  );
+  if (loggedAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome ${loggedAccount.owner.split(' ')[0]}`;
+
+    containerApp.style.opacity = 100;
+
+    calcDisplayBalance(loggedAccount);
+    calcDisplaySummary(loggedAccount);
+    displayMovements(loggedAccount);
+
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+  } else {
+    alert(`Username / PIN is not correct, Please try again.`);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
