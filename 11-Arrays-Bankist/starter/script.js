@@ -132,16 +132,18 @@ btnLogin.addEventListener('click', function (e) {
   );
   if (loggedAccount?.pin === Number(inputLoginPin.value)) {
     labelWelcome.textContent = `Welcome ${loggedAccount.owner.split(' ')[0]}`;
-
+    
     containerApp.style.opacity = 100;
-
+    
     calcDisplayBalance(loggedAccount);
     calcDisplaySummary(loggedAccount);
     displayMovements(loggedAccount);
-
+    
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
   } else {
+    labelWelcome.textContent = `Log in to get started`;
+    containerApp.style.opacity = 0;
     alert(`Username / PIN is not correct, Please try again.`);
   }
 });
