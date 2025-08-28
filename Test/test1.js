@@ -689,7 +689,7 @@ function checkDogs(julia, kate) {
     checkDogs(julia2, kate2);
     */
 // -------------------------------------- Lecture 155 --------------------------------------------------
-
+/* 
 const calcAverageHumanAge = function (dogAge) {
   const dogToHumanAge = dogAge.map((age) =>
     age <= 2 ? 2 * age : 16 + age * 4
@@ -707,10 +707,10 @@ const calcAverageHumanAge = function (dogAge) {
 console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 console.log("--------------------------------------");
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
-
+ */
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 /* 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const rate = 1.1;
 const mov = movements.map((move) => move * rate);
 console.log(mov);
@@ -729,8 +729,8 @@ const strMov = movements.map((mov, i, arr) =>
 // ------------------------------------- Section 11 - 159 ----------------------------------------------
 
 /* 
-const withdrawals = movements.filter((mov) => mov < 0);
-console.log(withdrawals);
+ const withdrawals = movements.filter((mov) => mov < 0);
+ console.log(withdrawals);
  */
 
 // ------------------------------------- Section 11 - 160 ----------------------------------------------
@@ -745,6 +745,21 @@ const globalBalance = movements.reduce(function (bal, mov, i) {
   const maximumValue = movements.reduce((acc, mov) => mov > acc ? mov : acc, movements[0]);
   
   console.log(maximumValue);
-*/
+  */
 
-// ------------------------------------- Section 11 - 161 ----------------------------------------------
+// ------------------------------------- Section 11 - 162 ----------------------------------------------
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1
+const allDepositeInUSD = function (movements) {
+  return movements
+  .filter((mov) => mov > 0)
+  .map((mov) => mov * eurToUsd)
+  .reduce((acc, mov) => (acc + mov), 0);
+};
+
+const test = allDepositeInUSD(movements);
+console.log(test);
+
+// ------------------------------------- Section 11 - 16 ----------------------------------------------
