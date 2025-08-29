@@ -208,6 +208,19 @@ btnTransfer.addEventListener('click', e => {
   clearInputs();
 });
 
+btnClose.addEventListener('click', e => {
+  e.preventDefault();
+  const closingAccount = accounts.find(
+    acc => acc.ownerUserName === inputCloseUsername.value
+  );
+  const closingAccountIndex = accounts.findIndex(acc => acc === closingAccount);
+  if (closingAccount)
+    Number(inputClosePin.value) === closingAccount.pin
+      ? accounts.splice(closingAccountIndex, 1)
+      : alert('Wrong PIN');
+  console.log(accounts);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
