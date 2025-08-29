@@ -163,6 +163,7 @@ btnTransfer.addEventListener('click', e => {
   const targetAccount = accounts.find(
     acc => acc.ownerUserName === inputTransferTo.value
   );
+  /* 
   if (targetAccount && targetAccount !== loggedAccount) {
     if (loggedAccount.balance >= transferAmount && transferAmount > 0) {
       loggedAccount.movements.push(-transferAmount);
@@ -183,6 +184,28 @@ btnTransfer.addEventListener('click', e => {
     );
     clearInputs();
   }
+ */
+  if (
+    !targetAccount ||
+    targetAccount.ownerUserName === loggedAccount.ownerUserName
+  ) {
+    alert(
+      `Transfer to "${inputTransferTo.value}" is not allowed, please check and retry.`
+    );
+    return;
+  }
+  if (transferAmount <= 0 || loggedAccount.balance < transferAmount) {
+    alert(
+      `${transferAmount} is not vaalid, you balance is (${loggedAccount.balance})`
+    );
+    return;
+  }
+
+  loggedAccount.movements.push(-transferAmount);
+  targetAccount.movements.push(transferAmount);
+
+  updateActiveUI(loggedAccount);
+  clearInputs();
 });
 
 /////////////////////////////////////////////////
