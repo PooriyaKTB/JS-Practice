@@ -70,7 +70,7 @@ const displayMovements = function (acc) {
 
     const html = `
     <div class="movements__row">
-    <div class="movements__type movements__type--${type}">${i + 1}:${type}</div>
+    <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
     <div class="movements__date">Date comes soon</div>
     <div class="movements__value">${mov}£</div>
     </div>
@@ -83,8 +83,8 @@ const displayMovements = function (acc) {
 // (displayMovements(account1));
 
 const calcDisplayBalance = function (account) {
-  const balance = account.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}£`;
+  account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${account.balance}£`;
 };
 // calcDisplayBalance(account1);
 
@@ -123,6 +123,12 @@ createUsername(accounts);
 // console.log(accounts);
 // console.log(createUsername(accounts));
 
+const updateActiveUI = function (logAccount) {
+  displayMovements(logAccount);
+  calcDisplaySummary(logAccount);
+  calcDisplayBalance(logAccount);
+};
+
 let loggedAccount;
 
 btnLogin.addEventListener('click', function (e) {
@@ -132,19 +138,50 @@ btnLogin.addEventListener('click', function (e) {
   );
   if (loggedAccount?.pin === Number(inputLoginPin.value)) {
     labelWelcome.textContent = `Welcome ${loggedAccount.owner.split(' ')[0]}`;
-    
+
     containerApp.style.opacity = 100;
-    
-    calcDisplayBalance(loggedAccount);
-    calcDisplaySummary(loggedAccount);
-    displayMovements(loggedAccount);
-    
+
+    updateActiveUI(loggedAccount);
+
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
   } else {
     labelWelcome.textContent = `Log in to get started`;
     containerApp.style.opacity = 0;
     alert(`Username / PIN is not correct, Please try again.`);
+  }
+});
+
+btnTransfer.addEventListener('click', e => {
+  e.preventDefault();
+  let transferAmount = Number(inputTransferAmount.value);
+  const clearInputs = () => {
+    inputTransferAmount.value = '';
+    inputTransferTo.value = '';
+    inputTransferAmount.blur();
+  };
+  const targetAccount = accounts.find(
+    acc => acc.ownerUserName === inputTransferTo.value
+  );
+  if (targetAccount && targetAccount !== loggedAccount) {
+    if (loggedAccount.balance >= transferAmount && transferAmount > 0) {
+      loggedAccount.movements.push(-transferAmount);
+      targetAccount.movements.push(transferAmount);
+
+      updateActiveUI(loggedAccount);
+
+      clearInputs();
+    } else {
+      alert(
+        `${transferAmount} is more than you balance (${loggedAccount.balance})`
+      );
+      clearInputs();
+    }
+  } else {
+    alert(
+      `Transfer to "${inputTransferTo.value}" is not allowed, please check and retry.`
+    );
+    clearInputs();
   }
 });
 
