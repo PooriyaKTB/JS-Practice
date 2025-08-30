@@ -689,7 +689,7 @@ function checkDogs(julia, kate) {
     checkDogs(julia2, kate2);
     */
 
-// -------------------------------------- Lecture 155 --------------------------------------------------
+// -------------------------------------- Lecture 161 --------------------------------------------------
 
 /* 
 const calcAverageHumanAge = function (dogAge) {
@@ -725,6 +725,52 @@ console.log("--------------------------------------");
 console.log(calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]));
  */
 
+// ------------------------------------- Section 11 - 171 ----------------------------------------------
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 8, curFood: 200, owners: ["Matilda"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
+  { weight: 32, curFood: 340, owners: ["Michael"] },
+];
+
+const recommendedFood = dogs.forEach(
+  (dog) => (dog.recFood = dog.weight ** 0.75 * 28)
+);
+console.log(dogs);
+console.log('----------------')
+
+const eatWell = (dog) =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+
+const sarahDog = dogs.find((dog) => dog.owners.includes("Sarah"));
+
+console.log(eatWell(sarahDog));
+console.log(sarahDog);
+console.log('----------------')
+
+const ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recFood).flatMap(dog=>dog.owners);
+const ownersEatTooLittle = dogs.filter(dog => dog.curFood < dog.recFood).flatMap(dog=>dog.owners);
+console.log(ownersEatTooMuch);
+console.log(ownersEatTooLittle);
+console.log('----------------')
+
+console.log(`${ownersEatTooMuch.join(' & ')}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(' & ')}'s dogs eat too little!`);
+console.log('----------------')
+
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+console.log('----------------')
+
+console.log(dogs.some(eatWell));
+console.log('----------------')
+
+const wellFooded = dogs.filter(eatWell)
+console.log(wellFooded);
+console.log('----------------')
+
+const sortedDogs = dogs.slice()
+console.log(sortedDogs);
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
 
 /* 
