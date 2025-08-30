@@ -210,25 +210,23 @@ btnTransfer.addEventListener('click', e => {
 
 btnClose.addEventListener('click', e => {
   e.preventDefault();
-  const closingAccount = accounts.find(
-    acc => acc.ownerUserName === inputCloseUsername.value
-  );
-  const closingAccountIndex = accounts.findIndex(acc => acc === closingAccount);
-  if (!closingAccount || closingAccount !== loggedAccount) {
+
+  const closingAccountIndex = accounts.findIndex(acc => acc === loggedAccount);
+
+  if (inputCloseUsername.value !== loggedAccount.ownerUserName) {
     alert('Not allowed');
     return;
   }
-  if (Number(inputClosePin.value) !== closingAccount.pin) {
+  if (Number(inputClosePin.value) !== loggedAccount.pin) {
     alert('Wrong PIN');
     return;
   }
 
   accounts.splice(closingAccountIndex, 1);
   alert('Account Closed Successfully.');
+  inputClosePin.value = inputCloseUsername.value = ''
   labelWelcome.textContent = `Log in to get started`;
   containerApp.style.opacity = 0;
-
-  console.log(accounts);
 });
 
 /////////////////////////////////////////////////
