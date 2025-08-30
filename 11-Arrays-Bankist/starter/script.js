@@ -196,7 +196,7 @@ btnTransfer.addEventListener('click', e => {
   }
   if (transferAmount <= 0 || loggedAccount.balance < transferAmount) {
     alert(
-      `${transferAmount} is not vaalid, you balance is (${loggedAccount.balance})`
+      `${transferAmount}£ is not valid, you balance is (${loggedAccount.balance}£).`
     );
     return;
   }
@@ -206,6 +206,26 @@ btnTransfer.addEventListener('click', e => {
 
   updateActiveUI(loggedAccount);
   clearInputs();
+});
+
+btnLoan.addEventListener('click', e => {
+  e.preventDefault();
+  const loanAmount = Number(inputLoanAmount.value)
+  if (
+    loanAmount > 0 &&
+    loggedAccount.movements.some(
+      mov => mov >= loanAmount * 0.1
+    )
+  ) {
+    loggedAccount.movements.push(loanAmount);
+    alert(
+      `${loanAmount}£ loan successfully transfered to your account.`
+    );
+  } else {
+    alert(`You are Not eligible for ${loanAmount}£ loan`);
+  }
+  updateActiveUI(loggedAccount);
+  inputLoanAmount.value = '';
 });
 
 btnClose.addEventListener('click', e => {
@@ -224,7 +244,7 @@ btnClose.addEventListener('click', e => {
 
   accounts.splice(closingAccountIndex, 1);
   alert('Account Closed Successfully.');
-  inputClosePin.value = inputCloseUsername.value = ''
+  inputClosePin.value = inputCloseUsername.value = '';
   labelWelcome.textContent = `Log in to get started`;
   containerApp.style.opacity = 0;
 });
