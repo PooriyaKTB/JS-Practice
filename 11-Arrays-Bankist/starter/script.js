@@ -290,5 +290,9 @@ console.log(overallBalance);
 const allMovements = accounts.map(acc => acc.movements);
 const overallBalance = allMovements.flat().reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalance);
+//---------------------------
+const overallBalance = accounts.map(acc => acc.movements).flat().reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
  */
 /////////////////////////////////////////////////
