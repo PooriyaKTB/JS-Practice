@@ -713,7 +713,7 @@ console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
 
 // ------------------------------------- Section 11 - 163 ----------------------------------------------
 
-
+/* 
 const calcAverageHumanAge2 = (dogAge) =>
   dogAge
     .map((age) => (age <= 2 ? age * 2 : 16 + age * 4))
@@ -723,7 +723,7 @@ const calcAverageHumanAge2 = (dogAge) =>
 console.log(calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]));
 console.log("--------------------------------------");
 console.log(calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]));
-
+ */
 
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
 
@@ -782,4 +782,29 @@ const test = allDepositeInUSD(movements);
 console.log(test);
  */
 
-// ------------------------------------- Section 11 - 163 ----------------------------------------------
+// ------------------------------------- Section 11 - 168 ----------------------------------------------
+
+/* 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const lastLargeDep = function(arr){
+  return arr.findLast(mov => mov > 2000)
+}
+
+const lastLargeDepInx = function(arr){
+  return arr.findLastIndex(mov => mov > 2000)
+}
+
+const lastLargeWid = function(arr){
+  return arr.findLast(mov => mov < 0 && Math.abs(mov) > 500)
+}
+
+const lastLargeWidInx = function(arr){
+  return arr.findLastIndex(mov => mov < 0 && Math.abs(mov) > 500)
+}
+
+console.log(lastLargeDep(movements))
+console.log(lastLargeDepInx(movements))
+console.log(lastLargeWid(movements))
+console.log(lastLargeWidInx(movements))
+ */
