@@ -210,17 +210,13 @@ btnTransfer.addEventListener('click', e => {
 
 btnLoan.addEventListener('click', e => {
   e.preventDefault();
-  const loanAmount = Number(inputLoanAmount.value)
+  const loanAmount = Number(inputLoanAmount.value);
   if (
     loanAmount > 0 &&
-    loggedAccount.movements.some(
-      mov => mov >= loanAmount * 0.1
-    )
+    loggedAccount.movements.some(mov => mov >= loanAmount * 0.1)
   ) {
     loggedAccount.movements.push(loanAmount);
-    alert(
-      `${loanAmount}£ loan successfully transfered to your account.`
-    );
+    alert(`${loanAmount}£ loan successfully transfered to your account.`);
   } else {
     alert(`You are Not eligible for ${loanAmount}£ loan`);
   }
@@ -276,5 +272,23 @@ const strMov = movements.map(
     )}`
 );
 console.log(strMov);
+ */
+/////////////////////////////////////////////////
+/* 
+const overallMovements = [];
+
+const allMovements = accounts.forEach(acc =>
+  overallMovements.push(acc.movements)
+);
+const overallBalance = overallMovements
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+//OR
+
+const allMovements = accounts.map(acc => acc.movements);
+const overallBalance = allMovements.flat().reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
  */
 /////////////////////////////////////////////////
