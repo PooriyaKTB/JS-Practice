@@ -214,10 +214,20 @@ btnClose.addEventListener('click', e => {
     acc => acc.ownerUserName === inputCloseUsername.value
   );
   const closingAccountIndex = accounts.findIndex(acc => acc === closingAccount);
-  if (closingAccount)
-    Number(inputClosePin.value) === closingAccount.pin
-      ? accounts.splice(closingAccountIndex, 1)
-      : alert('Wrong PIN');
+  if (!closingAccount || closingAccount !== loggedAccount) {
+    alert('Not allowed');
+    return;
+  }
+  if (Number(inputClosePin.value) !== closingAccount.pin) {
+    alert('Wrong PIN');
+    return;
+  }
+
+  accounts.splice(closingAccountIndex, 1);
+  alert('Account Closed Successfully.');
+  labelWelcome.textContent = `Log in to get started`;
+  containerApp.style.opacity = 0;
+
   console.log(accounts);
 });
 
