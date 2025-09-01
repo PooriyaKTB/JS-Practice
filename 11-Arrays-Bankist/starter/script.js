@@ -321,10 +321,12 @@ console.log(overallBalance);
 const overallBalance = accounts.map(acc => acc.movements).flat().reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalance);
 
- */
 
 const groupedAcc = Object.groupBy(accounts, acc => acc.movements.length > 6 ? 'highTrans' : "lowTrans")
 console.log(groupedAcc);
 console.log(groupedAcc.highTrans);
 console.log(groupedAcc.lowTrans);
+*/
+const hundredDiceRoll = Array.from({length:100}, ()=> Math.ceil(Math.random()*6))
+console.log(hundredDiceRoll);
 /////////////////////////////////////////////////
