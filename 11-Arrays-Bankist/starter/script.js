@@ -61,11 +61,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (move) {
+const displayMovements = function (move, sort = false) {
   containerMovements.innerHTML = '';
   //OR .tetxtContent = 0
-
-  move.forEach(function (mov, i) {
+  const moves = sort ? move.slice().sort((a, b) => a - b) : move;
+  moves.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -246,21 +246,32 @@ btnClose.addEventListener('click', e => {
 });
 
 let sorted = false;
+btnSort.addEventListener('click', e => {
+  e.preventDefault();
+  displayMovements(loggedAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
+/* 
+let sorted = false;
 
 btnSort.addEventListener('click', e => {
   e.preventDefault();
   if (!sorted) {
-    const loggedAccountMovements = loggedAccount.movements.slice();
-    loggedAccountMovements.sort((a, b) => a - b);
+    const loggedAccountMovements = loggedAccount.movements
+      .slice()
+      .sort((a, b) => a - b);
     displayMovements(loggedAccountMovements);
-    btnSort.textContent = `↑ SORT`
+    btnSort.textContent = `↑ SORT`;
     sorted = true;
   } else {
     displayMovements(loggedAccount.movements);
     sorted = false;
-    btnSort.textContent = `↓ SORT`
+    btnSort.textContent = `↓ SORT`;
   }
 });
+ */
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
