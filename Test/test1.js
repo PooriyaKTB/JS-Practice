@@ -744,7 +744,7 @@ BONUS: What's the average weight of the heaviest breed that likes to fetch? HINT
 TEST DATA:
 */
 
-
+/* 
 const breeds = [
   {
     breed: 'German Shepherd',
@@ -816,6 +816,7 @@ console.log('----------------')
 
 const heaviest = Math.max(...breeds.filter(dog => dog.activities.includes('fetch')).map(dog => dog.averageWeight))
 console.log(heaviest);
+ */
 
 // ------------------------------------- Section 11 - 178! ----------------------------------------------
 /* 

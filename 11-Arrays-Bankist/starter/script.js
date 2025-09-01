@@ -61,11 +61,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (acc) {
+const displayMovements = function (move) {
   containerMovements.innerHTML = '';
   //OR .tetxtContent = 0
 
-  acc.movements.forEach(function (mov, i) {
+  move.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -124,7 +124,7 @@ createUsername(accounts);
 // console.log(createUsername(accounts));
 
 const updateActiveUI = function (logAccount) {
-  displayMovements(logAccount);
+  displayMovements(logAccount.movements);
   calcDisplaySummary(logAccount);
   calcDisplayBalance(logAccount);
 };
@@ -245,6 +245,22 @@ btnClose.addEventListener('click', e => {
   containerApp.style.opacity = 0;
 });
 
+let sorted = false;
+
+btnSort.addEventListener('click', e => {
+  e.preventDefault();
+  if (!sorted) {
+    const loggedAccountMovements = loggedAccount.movements.slice();
+    loggedAccountMovements.sort((a, b) => a - b);
+    displayMovements(loggedAccountMovements);
+    btnSort.textContent = `↑ SORT`
+    sorted = true;
+  } else {
+    displayMovements(loggedAccount.movements);
+    sorted = false;
+    btnSort.textContent = `↓ SORT`
+  }
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
