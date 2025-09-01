@@ -791,7 +791,8 @@ const dogBothActivities = breeds.find(dog => dog.activities.includes('running') 
 console.log(dogBothActivities);
 console.log('----------------')
 
-const allActivities = breeds.map(dog => dog.activities).flat()
+// const allActivities = breeds.map(dog => dog.activities).flat()
+const allActivities = breeds.flatMap(dog => dog.activities)
 console.log(allActivities);
 console.log('----------------')
 
@@ -799,9 +800,11 @@ const uniqueActivities = [...new Set([...allActivities])]
 console.log(uniqueActivities);
 console.log('----------------')
 
-const swimmingAdjacent = [...new Set(breeds.filter(dog => dog.activities.includes('swimming')).flatMap(dog => dog.activities))]
-const swimmingindex = swimmingAdjacent.indexOf('swimming')
-const removeSwimming = swimmingAdjacent.splice(swimmingindex,1)
+// const swimmingAdjacent = [...new Set(breeds.filter(dog => dog.activities.includes('swimming')).flatMap(dog => dog.activities))]
+// const swimmingindex = swimmingAdjacent.indexOf('swimming')
+// const removeSwimming = swimmingAdjacent.splice(swimmingindex,1)
+const swimmingAdjacent = [...new Set(breeds.filter(dog => dog.activities.includes('swimming')).flatMap(dog => dog.activities).filter(dog => dog !== 'swimming'))]
+
 console.log(swimmingAdjacent);
 console.log('----------------')
 
