@@ -322,4 +322,9 @@ const overallBalance = accounts.map(acc => acc.movements).flat().reduce((acc, mo
 console.log(overallBalance);
 
  */
+
+const groupedAcc = Object.groupBy(accounts, acc => acc.movements.length > 6 ? 'highTrans' : "lowTrans")
+console.log(groupedAcc);
+console.log(groupedAcc.highTrans);
+console.log(groupedAcc.lowTrans);
 /////////////////////////////////////////////////
