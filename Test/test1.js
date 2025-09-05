@@ -1030,14 +1030,15 @@ console.log(++b); //increased and returns the updated value.
 
 console.log("----------------");
 /* const sumOfMovements = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce(
-    (acc, cur) =>
-      cur > 0
-        ? { deposit: acc.deposit + cur, withdraw: acc.withdraw }
-        : { deposit: acc.deposit, withdraw: acc.withdraw + Math.abs(cur) },
-    { deposit: 0, withdraw: 0 }
-  );*/
+.flatMap((acc) => acc.movements)
+.reduce(
+  (acc, cur) =>
+    cur > 0
+  ? { deposit: acc.deposit + cur, withdraw: acc.withdraw }
+  : { deposit: acc.deposit, withdraw: acc.withdraw + Math.abs(cur) },
+  { deposit: 0, withdraw: 0 }
+  );
+  
 const sumOfMovements = accounts
   .flatMap((acc) => acc.movements)
   .reduce(
@@ -1046,5 +1047,18 @@ const sumOfMovements = accounts
       return acc;
     },
     { deposit: 0, withdraw: 0 }
+  );*/
+
+const {deposit, withdraw} = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (acc, cur) => {
+      acc[cur > 0 ? 'deposit': 'withdraw'] += Math.abs(cur);
+      return acc;
+    },
+    { deposit: 0, withdraw: 0 }
   );
-console.log(sumOfMovements);
+
+console.log(deposit);
+console.log(withdraw);
+console.log("----------------");
