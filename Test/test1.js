@@ -1062,7 +1062,7 @@ const { deposit, withdraw } = accounts
 console.log(deposit);
 console.log(withdraw);
 console.log("----------------");
-
+/* 
 const titleCase = function (str) {
   const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
 
@@ -1076,8 +1076,24 @@ const titleCase = function (str) {
     
     .join(" ");
 };
+ */
+const titleCase = function (str) {
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
+  const capitalize = (str) => str.replace(str[0], str[0].toUpperCase());
+  return capitalize(str
+    .toLowerCase()
+    .split(" ")
+    .map((word) =>
+      exceptions.includes(word)
+        ? word
+        : // : word[0].toUpperCase() + word.slice(1))
+          capitalize(word)
+    )
+    .join(" "));
+};
+
 console.log(
   titleCase(
-    "this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say wiTH happiness."
+    "and this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say wiTH happiness."
   )
 );
