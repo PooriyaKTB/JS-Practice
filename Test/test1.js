@@ -1010,10 +1010,23 @@ console.log("----------------");
 
 /* const more1kDeposites = accounts
 .flatMap((acc) => acc.movements)
-.filter((mov) => mov >= 1000).length */
+.filter((mov) => mov >= 1000).length 
+*/
 
 const more1kDeposites = accounts
 .flatMap((acc) => acc.movements)
-.reduce((acc, cur) => (cur >= 1000 ? acc + 1 : acc), 0);
+.reduce((acc, cur) => (cur >= 1000 ? ++acc : acc), 0);
 console.log(more1kDeposites);
+
 console.log("----------------");
+
+//*** Prefixed ++ operator used in line 1018. => acc++ is equal to zero, because unless it did increase value by 1, BUT returns 0 to next itteration as it's behavior is to return previous value (not updated). to solve this out we can use ++acc to return increased value.
+let a= 10
+console.log(a++); //increased the value, but returns previous value.
+console.log(a); //to see ++ did the increasment.
+console.log("***");
+let b = 10;
+console.log(++b); //increased and returns the updated value.
+
+console.log("----------------");
+
