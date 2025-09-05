@@ -1049,11 +1049,11 @@ const sumOfMovements = accounts
     { deposit: 0, withdraw: 0 }
   );*/
 
-const {deposit, withdraw} = accounts
+const { deposit, withdraw } = accounts
   .flatMap((acc) => acc.movements)
   .reduce(
     (acc, cur) => {
-      acc[cur > 0 ? 'deposit': 'withdraw'] += Math.abs(cur);
+      acc[cur > 0 ? "deposit" : "withdraw"] += Math.abs(cur);
       return acc;
     },
     { deposit: 0, withdraw: 0 }
@@ -1062,3 +1062,13 @@ const {deposit, withdraw} = accounts
 console.log(deposit);
 console.log(withdraw);
 console.log("----------------");
+
+const titleCase = function (str) {
+  return str
+    .split(" ")
+    .flatMap((word) =>
+      word.length > 1 ? word.toLowerCase().replace(word[0], word[0].toUpperCase()) : word.toLowerCase()
+    )
+    .join(" ");
+};
+console.log(titleCase("this is a nice title."));
