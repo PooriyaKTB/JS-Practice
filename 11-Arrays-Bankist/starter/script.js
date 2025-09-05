@@ -325,8 +325,14 @@ console.log(overallBalance);
 const groupedAcc = Object.groupBy(accounts, acc => acc.movements.length > 6 ? 'highTrans' : "lowTrans")
 console.log(groupedAcc);
 console.log(groupedAcc.highTrans);
-console.log(groupedAcc.lowTrans);
+console.log(groupedAcc.lowTrans); 
 */
-const hundredDiceRoll = Array.from({length:100}, ()=> Math.ceil(Math.random()*6))
-console.log(hundredDiceRoll);
+document.querySelector('.logo').addEventListener('click', function () {
+  const allMoves = Array.from(
+    document.querySelectorAll('.movements__value'),
+    mov => Number(mov.innerHTML.replace('£', ''))
+  );
+  console.log(allMoves);
+});
+
 /////////////////////////////////////////////////

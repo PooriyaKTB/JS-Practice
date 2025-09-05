@@ -930,22 +930,43 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const lastLargeDep = function(arr){
   return arr.findLast(mov => mov > 2000)
-}
+  }
+  
+  const lastLargeDepInx = function(arr){
+    return arr.findLastIndex(mov => mov > 2000)
+    }
+    
+    const lastLargeWid = function(arr){
+      return arr.findLast(mov => mov < 0 && Math.abs(mov) > 500)
+      }
+      
+      const lastLargeWidInx = function(arr){
+        return arr.findLastIndex(mov => mov < 0 && Math.abs(mov) > 500)
+        }
+        
+        console.log(lastLargeDep(movements))
+        console.log(lastLargeDepInx(movements))
+        console.log(lastLargeWid(movements))
+        console.log(lastLargeWidInx(movements))
+        */
 
-const lastLargeDepInx = function(arr){
-  return arr.findLastIndex(mov => mov > 2000)
-}
+// ------------------------------------- Section 11 - 174 ----------------------------------------------
 
-const lastLargeWid = function(arr){
-  return arr.findLast(mov => mov < 0 && Math.abs(mov) > 500)
-}
+/* 
+const hundredDiceRoll = Array.from({length:100}, ()=> Math.ceil(Math.random()*6))
+console.log(hundredDiceRoll);
+*/
 
-const lastLargeWidInx = function(arr){
-  return arr.findLastIndex(mov => mov < 0 && Math.abs(mov) > 500)
-}
+// ------------------------------------- Section 11 - 174 ----------------------------------------------
 
-console.log(lastLargeDep(movements))
-console.log(lastLargeDepInx(movements))
-console.log(lastLargeWid(movements))
-console.log(lastLargeWidInx(movements))
- */
+/* 
+const fizzBuzz = Array.from({ length: 100 }, (_,i) => {
+  if ((i+1) % 3 == 0 && (i+1) % 5 == 0) return "fizzbuzz";
+  else if ((i+1) % 3 == 0) return "fizz";
+  else if ((i+1) % 5 == 0) return "buzz";
+  else return (i+1)
+  });
+  console.log(fizzBuzz);
+  */
+
+// ------------------------------------- Section 11 - 174 ----------------------------------------------
