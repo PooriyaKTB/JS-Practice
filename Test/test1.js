@@ -1064,19 +1064,20 @@ console.log(withdraw);
 console.log("----------------");
 
 const titleCase = function (str) {
-  const exeptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'the', 'and', 'for'];
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
 
   return str.toLowerCase()
     .split(" ")
     .map((word) =>
-      exeptions.includes(word)
+      exceptions.includes(word)
         ? word
-        : word.replace(word[0], word[0].toUpperCase())
-    )
+        // : word[0].toUpperCase() + word.slice(1))
+        : word.replace(word[0], word[0].toUpperCase()))
+    
     .join(" ");
 };
 console.log(
   titleCase(
-    "this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say."
+    "this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say wiTH happiness."
   )
 );
