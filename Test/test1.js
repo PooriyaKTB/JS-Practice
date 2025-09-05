@@ -1029,13 +1029,22 @@ let b = 10;
 console.log(++b); //increased and returns the updated value.
 
 console.log("----------------");
-const sumOfMovements = accounts
+/* const sumOfMovements = accounts
   .flatMap((acc) => acc.movements)
   .reduce(
     (acc, cur) =>
       cur > 0
-        ? { deposit: acc.deposit + cur, widraw: acc.widraw }
-        : { deposit: acc.deposit, widraw: acc.widraw + Math.abs(cur) },
-    { deposit: 0, widraw: 0 }
+        ? { deposit: acc.deposit + cur, withdraw: acc.withdraw }
+        : { deposit: acc.deposit, withdraw: acc.withdraw + Math.abs(cur) },
+    { deposit: 0, withdraw: 0 }
+  );*/
+const sumOfMovements = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (acc, cur) => {
+      cur > 0 ? acc.deposit += cur : acc.withdraw += Math.abs(cur);
+      return acc;
+    },
+    { deposit: 0, withdraw: 0 }
   );
 console.log(sumOfMovements);
