@@ -322,11 +322,11 @@ const overallBalance = accounts.map(acc => acc.movements).flat().reduce((acc, mo
 console.log(overallBalance);
 
 
+//-------------174--------------
 const groupedAcc = Object.groupBy(accounts, acc => acc.movements.length > 6 ? 'highTrans' : "lowTrans")
 console.log(groupedAcc);
 console.log(groupedAcc.highTrans);
 console.log(groupedAcc.lowTrans); 
-*/
 document.querySelector('.logo').addEventListener('click', function () {
   const allMoves = Array.from(
     document.querySelectorAll('.movements__value'),
@@ -334,5 +334,6 @@ document.querySelector('.logo').addEventListener('click', function () {
   );
   console.log(allMoves);
 });
+*/
 
 /////////////////////////////////////////////////
