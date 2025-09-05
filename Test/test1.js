@@ -1006,5 +1006,14 @@ const totaldeposited = accounts
   .filter((mov) => mov > 0)
   .reduce((total, mov) => total + mov);
 console.log(totaldeposited);
-console.log('----------------')
+console.log("----------------");
 
+/* const more1kDeposites = accounts
+.flatMap((acc) => acc.movements)
+.filter((mov) => mov >= 1000).length */
+
+const more1kDeposites = accounts
+.flatMap((acc) => acc.movements)
+.reduce((acc, cur) => (cur >= 1000 ? acc + 1 : acc), 0);
+console.log(more1kDeposites);
+console.log("----------------");
