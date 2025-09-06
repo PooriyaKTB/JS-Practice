@@ -819,53 +819,70 @@ console.log(heaviest);
  */
 
 // ------------------------------------- Section 11 - 178! ----------------------------------------------
-/* 
+
 const dogs = [
-  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
-  { weight: 8, curFood: 200, owners: ["Matilda"] },
-  { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
-  { weight: 32, curFood: 340, owners: ["Michael"] },
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John', 'Leo'] },
+  { weight: 18, curFood: 244, owners: ['Joe'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
 
 const recommendedFood = dogs.forEach(
-  (dog) => (dog.recFood = dog.weight ** 0.75 * 28)
+  dog => (dog.recFood = Math.floor(dog.weight ** 0.75 * 28))
 );
 console.log(dogs);
-console.log('----------------')
+console.log('--------2--------');
 
-const eatWell = (dog) =>
+const eatWell = dog =>
   dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
 
-const sarahDog = dogs.find((dog) => dog.owners.includes("Sarah"));
+const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
 
 console.log(eatWell(sarahDog));
 console.log(sarahDog);
-console.log('----------------')
+console.log('--------3--------');
 
-const ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recFood).flatMap(dog=>dog.owners);
-const ownersEatTooLittle = dogs.filter(dog => dog.curFood < dog.recFood).flatMap(dog=>dog.owners);
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .flatMap(dog => dog.owners);
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
 console.log(ownersEatTooMuch);
 console.log(ownersEatTooLittle);
-console.log('----------------')
+console.log('--------4--------');
 
 console.log(`${ownersEatTooMuch.join(' & ')}'s dogs eat too much!`);
 console.log(`${ownersEatTooLittle.join(' & ')}'s dogs eat too little!`);
-console.log('----------------')
+console.log('--------5--------');
 
 console.log(dogs.some(dog => dog.curFood === dog.recFood));
-console.log('----------------')
+console.log('--------6--------');
 
-console.log(dogs.some(eatWell));
-console.log('----------------')
+console.log(dogs.every(eatWell));
+console.log('--------7--------');
 
-const wellFooded = dogs.filter(eatWell)
+const wellFooded = dogs.filter(eatWell);
 console.log(wellFooded);
-console.log('----------------')
+console.log('--------8--------');
 
-const sortedDogs = dogs.slice()
-console.log(sortedDogs); 
-*/
+const groupedDog = Object.groupBy(dogs, dog => {
+  if (dog.curFood > dog.recFood) return 'too-much';
+  if (dog.curFood < dog.recFood) return 'too-little';
+  return 'exact';
+});
+console.log(groupedDog);
+console.log('--------9--------');
+const sortedByOwner = Object.groupBy(dogs, dog => {
+  return `${dog.owners.length} owners`;
+});
+console.log(sortedByOwner);
+console.log('--------10-------');
 
+const sortedDogs = dogs.toSorted((a, b) => a.recFood - b.recFood);
+console.log(sortedDogs);
+// console.log(dogs);
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
 
 /* 
@@ -971,129 +988,129 @@ const fizzBuzz = Array.from({ length: 100 }, (_,i) => {
 
 // ------------------------------------- Section 11 - 177 ----------------------------------------------
 
-const account1 = {
-  owner: "Jonas Schmedtmann",
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
-  pin: 1111,
-};
+// const account1 = {
+//   owner: "Jonas Schmedtmann",
+//   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+//   interestRate: 1.2, // %
+//   pin: 1111,
+// };
 
-const account2 = {
-  owner: "Jessica Davis",
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5,
-  pin: 2222,
-};
+// const account2 = {
+//   owner: "Jessica Davis",
+//   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+//   interestRate: 1.5,
+//   pin: 2222,
+// };
 
-const account3 = {
-  owner: "Steven Thomas Williams",
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
-  pin: 3333,
-};
+// const account3 = {
+//   owner: "Steven Thomas Williams",
+//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
+//   interestRate: 0.7,
+//   pin: 3333,
+// };
 
-const account4 = {
-  owner: "Sarah Smith",
-  movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
-  pin: 4444,
-};
+// const account4 = {
+//   owner: "Sarah Smith",
+//   movements: [430, 1000, 700, 50, 90],
+//   interestRate: 1,
+//   pin: 4444,
+// };
 
-const accounts = [account1, account2, account3, account4];
+// const accounts = [account1, account2, account3, account4];
 
-const totaldeposited = accounts
-  .flatMap((acc) => acc.movements)
-  .filter((mov) => mov > 0)
-  .reduce((total, mov) => total + mov);
-console.log(totaldeposited);
-console.log("----------------");
+// const totaldeposited = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov > 0)
+//   .reduce((total, mov) => total + mov);
+// console.log(totaldeposited);
+// console.log("----------------");
 
-/* const more1kDeposites = accounts
-.flatMap((acc) => acc.movements)
-.filter((mov) => mov >= 1000).length 
-*/
+// /* const more1kDeposites = accounts
+// .flatMap((acc) => acc.movements)
+// .filter((mov) => mov >= 1000).length
+// */
 
-const more1kDeposites = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce((acc, cur) => (cur >= 1000 ? ++acc : acc), 0);
-console.log(more1kDeposites);
+// const more1kDeposites = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce((acc, cur) => (cur >= 1000 ? ++acc : acc), 0);
+// console.log(more1kDeposites);
 
-console.log("----------------");
+// console.log("----------------");
 
-//*** Prefixed ++ operator used in line 1018. => acc++ is equal to zero, because unless it did increase value by 1, BUT returns 0 to next itteration as it's behavior is to return previous value (not updated). to solve this out we can use ++acc to return increased value.
-let a = 10;
-console.log(a++); //increased the value, but returns previous value.
-console.log(a); //to see ++ did the increasment.
-console.log("***");
-let b = 10;
-console.log(++b); //increased and returns the updated value.
+// //*** Prefixed ++ operator used in line 1018. => acc++ is equal to zero, because unless it did increase value by 1, BUT returns 0 to next itteration as it's behavior is to return previous value (not updated). to solve this out we can use ++acc to return increased value.
+// let a = 10;
+// console.log(a++); //increased the value, but returns previous value.
+// console.log(a); //to see ++ did the increasment.
+// console.log("***");
+// let b = 10;
+// console.log(++b); //increased and returns the updated value.
 
-console.log("----------------");
-/* const sumOfMovements = accounts
-.flatMap((acc) => acc.movements)
-.reduce(
-  (acc, cur) =>
-    cur > 0
-  ? { deposit: acc.deposit + cur, withdraw: acc.withdraw }
-  : { deposit: acc.deposit, withdraw: acc.withdraw + Math.abs(cur) },
-  { deposit: 0, withdraw: 0 }
-  );
-  
-const sumOfMovements = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce(
-    (acc, cur) => {
-      cur > 0 ? acc.deposit += cur : acc.withdraw += Math.abs(cur);
-      return acc;
-    },
-    { deposit: 0, withdraw: 0 }
-  );*/
+// console.log("----------------");
+// /* const sumOfMovements = accounts
+// .flatMap((acc) => acc.movements)
+// .reduce(
+//   (acc, cur) =>
+//     cur > 0
+//   ? { deposit: acc.deposit + cur, withdraw: acc.withdraw }
+//   : { deposit: acc.deposit, withdraw: acc.withdraw + Math.abs(cur) },
+//   { deposit: 0, withdraw: 0 }
+//   );
 
-const { deposit, withdraw } = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce(
-    (acc, cur) => {
-      acc[cur > 0 ? "deposit" : "withdraw"] += Math.abs(cur);
-      return acc;
-    },
-    { deposit: 0, withdraw: 0 }
-  );
+// const sumOfMovements = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce(
+//     (acc, cur) => {
+//       cur > 0 ? acc.deposit += cur : acc.withdraw += Math.abs(cur);
+//       return acc;
+//     },
+//     { deposit: 0, withdraw: 0 }
+//   );*/
 
-console.log(deposit);
-console.log(withdraw);
-console.log("----------------");
-/* 
-const titleCase = function (str) {
-  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
+// const { deposit, withdraw } = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce(
+//     (acc, cur) => {
+//       acc[cur > 0 ? "deposit" : "withdraw"] += Math.abs(cur);
+//       return acc;
+//     },
+//     { deposit: 0, withdraw: 0 }
+//   );
 
-  return str.toLowerCase()
-    .split(" ")
-    .map((word) =>
-      exceptions.includes(word)
-        ? word
-        // : word[0].toUpperCase() + word.slice(1))
-        : word.replace(word[0], word[0].toUpperCase()))
-    
-    .join(" ");
-};
- */
-const titleCase = function (str) {
-  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
-  const capitalize = (str) => str.replace(str[0], str[0].toUpperCase());
-  return capitalize(str
-    .toLowerCase()
-    .split(" ")
-    .map((word) =>
-      exceptions.includes(word)
-        ? word
-        : // : word[0].toUpperCase() + word.slice(1))
-          capitalize(word)
-    )
-    .join(" "));
-};
+// console.log(deposit);
+// console.log(withdraw);
+// console.log("----------------");
+// /*
+// const titleCase = function (str) {
+//   const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
 
-console.log(
-  titleCase(
-    "and this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say wiTH happiness."
-  )
-);
+//   return str.toLowerCase()
+//     .split(" ")
+//     .map((word) =>
+//       exceptions.includes(word)
+//         ? word
+//         // : word[0].toUpperCase() + word.slice(1))
+//         : word.replace(word[0], word[0].toUpperCase()))
+
+//     .join(" ");
+// };
+//  */
+// const titleCase = function (str) {
+//   const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and', 'for'];
+//   const capitalize = (str) => str.replace(str[0], str[0].toUpperCase());
+//   return capitalize(str
+//     .toLowerCase()
+//     .split(" ")
+//     .map((word) =>
+//       exceptions.includes(word)
+//         ? word
+//         : // : word[0].toUpperCase() + word.slice(1))
+//           capitalize(word)
+//     )
+//     .join(" "));
+// };
+
+// console.log(
+//   titleCase(
+//     "and this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say wiTH happiness."
+//   )
+// );
