@@ -254,6 +254,7 @@ btnSort.addEventListener('click', function (e) {
 
 // ------------------------------------- Section 12 - 183 ----------------------------------------------
 
+/* 
 const toRed = function () {
   [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
     if (i % 2 === 0) row.style.backgroundColor = 'red';
@@ -261,3 +262,4 @@ const toRed = function () {
   });
 };
 document.querySelector('.logo').addEventListener('click', toRed);
+ */

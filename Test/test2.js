@@ -20,3 +20,9 @@ const createRandomInt = function (min, max) {
 // ------------------------------------- Section 12 - 183 ----------------------------------------------
 
 const isEven = (x) => x % 2 === 0;
+
+// ------------------------------------- Section 12 - 184 ----------------------------------------------
+
+console.log(2 ** 53 - 1); 
+console.log(90071992547409953); // more that 2**53 cause wierd result
+console.log(Number.MAX_SAFE_INTEGER);
