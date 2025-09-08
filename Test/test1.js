@@ -819,7 +819,7 @@ console.log(heaviest);
  */
 
 // ------------------------------------- Section 11 - 178! ----------------------------------------------
-
+/* 
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
   { weight: 8, curFood: 200, owners: ['Matilda'] },
@@ -883,6 +883,7 @@ console.log('--------10-------');
 const sortedDogs = dogs.toSorted((a, b) => a.recFood - b.recFood);
 console.log(sortedDogs);
 // console.log(dogs);
+ */
 // ------------------------------------- Section 11 - 157 ----------------------------------------------
 
 /* 
@@ -1114,3 +1115,5 @@ const fizzBuzz = Array.from({ length: 100 }, (_,i) => {
 //     "and this is a nice title And A test for THE function in file on top of this LINE, But it WORKS PERFEct In CAse we could say wiTH happiness."
 //   )
 // );
+
+// ------------------------------------- Section 12 - 1 ----------------------------------------------
