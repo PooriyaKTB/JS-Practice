@@ -90,12 +90,12 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-    const movDate = new Date(acc.movementsDates[i]);
-    const year = movDate.getFullYear();
-    const month = String(movDate.getMonth() + 1).padStart(2, '0');
-    const day = String(movDate.getDate()).padStart(2, '0');
-    const hour = movDate.getHours();
-    const min = movDate.getMinutes();
+    const curDate = new Date(acc.movementsDates[i]);
+    const year = curDate.getFullYear();
+    const month = String(curDate.getMonth() + 1).padStart(2, '0');
+    const day = String(curDate.getDate()).padStart(2, '0');
+    const hour = curDate.getHours();
+    const min = curDate.getMinutes();
     const showingDate = `${day}/${month}/${year}`; //at ${hour}:${min}
 
     const html = `
@@ -165,15 +165,6 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
-const movDate = new Date();
-const year = movDate.getFullYear();
-const month = String(movDate.getMonth() + 1).padStart(2, '0');
-const day = String(movDate.getDate()).padStart(2, '0');
-const hour = movDate.getHours();
-const minute = movDate.getMinutes();
-
-labelDate.textContent = `${day}/${month}/${year} at ${hour}:${minute}`;
-
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -189,6 +180,15 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
+
+    const curDate = new Date();
+    const year = curDate.getFullYear();
+    const month = String(curDate.getMonth() + 1).padStart(2, '0');
+    const day = String(curDate.getDate()).padStart(2, '0');
+    const hour = curDate.getHours();
+    const minute = curDate.getMinutes();
+
+    labelDate.textContent = `${day}/${month}/${year}   ${hour}:${minute}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
