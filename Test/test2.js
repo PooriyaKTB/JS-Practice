@@ -48,3 +48,11 @@ console.log(Date.now()); //returns current time as timestamp (based on PC time)
 // We have set versions of All methods above (.set...()) to set into our Date (not get)
 console.log(future.setFullYear(2040));
 console.log(future);
+
+// ------------------------------------- Section 12 - 189 ----------------------------------------------
+
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+console.log(calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14)));
+// For really precise calculation, there is a free javascript library called moment.js
