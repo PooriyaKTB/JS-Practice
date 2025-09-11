@@ -91,11 +91,11 @@ const movementsDates = function (date) {
   if (passedDate < 1 && passedDate >= 0) return `Today`;
   if (passedDate >= 1 && passedDate < 2) return `Yesterday`;
   if (passedDate >= 2 && passedDate < 7) return `${passedDate} Days ago`;
-  
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `On ${day}/${month}/${year}`;
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `On ${day}/${month}/${year}`;
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -186,6 +186,9 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+const curDate = new Date();
+labelDate.textContent = new Intl.DateTimeFormat('en-GB').format(curDate) //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION. also we passed the date that we want to format into .format
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -201,7 +204,7 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
-
+    /* 
     const curDate = new Date();
     const year = curDate.getFullYear();
     const month = String(curDate.getMonth() + 1).padStart(2, '0');
@@ -210,7 +213,7 @@ btnLogin.addEventListener('click', function (e) {
     const minute = String(curDate.getMinutes()).padStart(2, '0');
 
     labelDate.textContent = `${day}/${month}/${year}   ${hour}:${minute}`;
-
+ */
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
