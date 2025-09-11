@@ -81,7 +81,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const movementsDates = function (date) {
+const movementsDates = function (date, locale) {
   // const showingDate = `${day}/${month}/${year}`; //at ${hour}:${min}
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1)) / (1000 * 60 * 60 * 24);
@@ -92,10 +92,11 @@ const movementsDates = function (date) {
   if (passedDate >= 1 && passedDate < 2) return `Yesterday`;
   if (passedDate >= 2 && passedDate < 7) return `${passedDate} Days ago`;
 
-  const year = date.getFullYear();
+/*   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  return `On ${day}/${month}/${year}`;
+  return `On ${day}/${month}/${year}`; */
+  return new Intl.DateTimeFormat(locale).format(date)
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -117,7 +118,7 @@ const displayMovements = function (acc, sort = false) {
 
     const curDate = new Date(date);
 
-    const showingDate = movementsDates(curDate);
+    const showingDate = movementsDates(curDate, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -186,18 +187,6 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
-const options = {
-  hour: 'numeric',
-  minute: 'numeric',
-  day: 'numeric',
-  month: 'long', // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
-  year: 'numeric', // Can be '2-digit' as well. (like month)
-  weekday: 'long', // Can be 'short' OR 'narrow'
-};
-const local = navigator.language;
-
-labelDate.textContent = new Intl.DateTimeFormat(local, options).format(curDate); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
-
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -229,12 +218,12 @@ btnLogin.addEventListener('click', function (e) {
       hour: 'numeric',
       minute: 'numeric',
       day: 'numeric',
-      month: 'long', 
+      month: 'numeric', 
       year: 'numeric',
-      weekday: 'long',
+      // weekday: 'long',
     };
-    const local = navigator.language;
-    labelDate.textContent = new Intl.DateTimeFormat('en-GB', options).format(
+    
+    labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(
       curDate
     );
 
