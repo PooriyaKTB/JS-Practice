@@ -51,6 +51,7 @@ console.log(future);
 
 // ------------------------------------- Section 12 - 189 ----------------------------------------------
 
+// Do operation with Date: (with connverting to timestamp underneat, it's doable)
 const calcDaysPassed = (date1, date2) =>
   Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
 
