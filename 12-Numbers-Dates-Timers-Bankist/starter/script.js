@@ -82,25 +82,20 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // Functions
 
 const movementsDates = function (date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hour = date.getHours();
-  const min = date.getMinutes();
   // const showingDate = `${day}/${month}/${year}`; //at ${hour}:${min}
-  const calcDaysPassed = (date1 = new Date(), date2) => {
-    const passedDate = Math.round(Math.abs(date2 - date1)) / (1000 * 60 * 60 * 24);
-    if (passedDate < 1 && passedDate >= 0) {
-      return `Today`;
-    } else if (passedDate >= 1 && passedDate < 2) {
-      return `Yesterday`;
-    } else if (passedDate >= 2 && passedDate < 7) {
-      return `${passedDate} Days ago`;
-    } else {
-      return `On ${day}/${month}/${year}`;
-    }
-  };
-  return calcDaysPassed(new Date(), date);
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1)) / (1000 * 60 * 60 * 24);
+
+  const passedDate = calcDaysPassed(new Date(), date);
+
+  if (passedDate < 1 && passedDate >= 0) return `Today`;
+  if (passedDate >= 1 && passedDate < 2) return `Yesterday`;
+  if (passedDate >= 2 && passedDate < 7) return `${passedDate} Days ago`;
+  
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `On ${day}/${month}/${year}`;
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -121,34 +116,7 @@ const displayMovements = function (acc, sort = false) {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
     const curDate = new Date(date);
-    /* 
-    // Double check later in course
-    const displayDate = formateMovementDate(date, acc.local);
-    const formattedMov = formatCur(movement, acc.local, acc.currency);
- */
-    /* const year = curDate.getFullYear();
-    const month = String(curDate.getMonth() + 1).padStart(2, '0');
-    const day = String(curDate.getDate()).padStart(2, '0');
-    const hour = curDate.getHours();
-    const min = curDate.getMinutes();
-    // const showingDate = `${day}/${month}/${year}`; //at ${hour}:${min}
-    const calcDaysPassed = (date1 = new Date(), date2) => {
-      const passedDate = Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
-      if (passedDate >= 1 && passedDate < 2) {
-        return `Yesterday`;
-      } else if (passedDate < 1 && passedDate > 0) {
-        return `Today`;
-      } else if (passedDate >= 2 && passedDate < 7) {
-        return `${passedDate / 7} weeks ago`;
-      } else if (passedDate >= 7 && passedDate < 30) {
-        return `${passedDate / 7} weeks ago`;
-      } else if (passedDate >= 30 && passedDate < 365) {
-        return `${passedDate / 30} months ago`;
-      } else {
-        return `On ${day}/${month}/${year}`;
-      }
-    }; 
-    */
+
     const showingDate = movementsDates(curDate);
 
     const html = `
