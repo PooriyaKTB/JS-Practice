@@ -186,18 +186,27 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
-const curDate = new Date();
-labelDate.textContent = new Intl.DateTimeFormat('en-GB').format(curDate) //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION. also we passed the date that we want to format into .format
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long', // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
+  year: 'numeric', // Can be '2-digit' as well. (like month)
+  weekday: 'long', // Can be 'short' OR 'narrow'
+};
+const local = navigator.language;
+
+labelDate.textContent = new Intl.DateTimeFormat(local, options).format(curDate); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
-
+  
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-
+  
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
@@ -211,9 +220,24 @@ btnLogin.addEventListener('click', function (e) {
     const day = String(curDate.getDate()).padStart(2, '0');
     const hour = String(curDate.getHours()).padStart(2, '0');
     const minute = String(curDate.getMinutes()).padStart(2, '0');
-
+    
     labelDate.textContent = `${day}/${month}/${year}   ${hour}:${minute}`;
- */
+    */
+   
+   const curDate = new Date();
+   const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'long', 
+      year: 'numeric',
+      weekday: 'long',
+    };
+    const local = navigator.language;
+    labelDate.textContent = new Intl.DateTimeFormat('en-GB', options).format(
+      curDate
+    );
+
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();

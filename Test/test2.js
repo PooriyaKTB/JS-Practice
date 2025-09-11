@@ -57,3 +57,23 @@ const calcDaysPassed = (date1, date2) =>
 
 console.log(calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14)));
 // For really precise calculation, there is a free javascript library called moment.js
+
+// ------------------------------------- Section 12 - 190 ----------------------------------------------
+
+const options = {
+  hour: "numeric",
+  minute: "numeric",
+  day: "numeric",
+  month: "long", // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
+  year: "numeric", // Can be '2-digit' as well. (like month)
+  weekday: "long", // Can be 'short' OR 'narrow'
+};
+
+labelDate.textContent = new Intl.DateTimeFormat("en-GB", options).format(
+  curDate
+); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
+
+const local = navigator.language; // To get browser local strting in language-REGION fromat.
+labelDate.textContent = new Intl.DateTimeFormat(local, options).format(
+  curDate
+);
