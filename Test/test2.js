@@ -27,6 +27,17 @@ console.log(2 ** 53 - 1);
 console.log(90071992547409953); // more that 2**53 cause wierd result
 console.log(Number.MAX_SAFE_INTEGER);
 
+// Extra info:
+    // Smallest "+" number:
+        const min = 2 ** -1074;
+        console.log(min); // 5e-324
+
+    // Smallest number "-" :
+        console.log(Number.MIN_SAFE_INTEGER);
+
+    // Unsafe biggest number:
+        console.log(Number.MAX_VALUE);
+
 // ------------------------------------- Section 12 - 186 ----------------------------------------------
 
 const future = new Date(2037, 10, 19, 15, 23);
@@ -61,19 +72,23 @@ console.log(calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14)));
 // ------------------------------------- Section 12 - 190 ----------------------------------------------
 
 const options = {
-  hour: "numeric",
-  minute: "numeric",
-  day: "numeric",
-  month: "long", // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
-  year: "numeric", // Can be '2-digit' as well. (like month)
-  weekday: "long", // Can be 'short' OR 'narrow'
+    hour: "numeric",
+    minute: "numeric",
+    day: "numeric",
+    month: "long", // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
+    year: "numeric", // Can be '2-digit' as well. (like month)
+    weekday: "long", // Can be 'short' OR 'narrow'
 };
 
-labelDate.textContent = new Intl.DateTimeFormat("en-GB", options).format(
-  curDate
-); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
+const curDate = new Date();
+
+console.log(new Intl.DateTimeFormat("en-GB", options).format(
+    curDate
+)); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
 
 const local = navigator.language; // To get browser local strting in language-REGION fromat.
-labelDate.textContent = new Intl.DateTimeFormat(local, options).format(
-  curDate
-);
+console.log(new Intl.DateTimeFormat(local, options).format(
+    curDate
+));
+
+// ------------------------------------- Section 12 - 190 ----------------------------------------------
