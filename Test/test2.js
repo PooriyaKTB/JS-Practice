@@ -93,6 +93,19 @@ console.log(new Intl.DateTimeFormat(local, options).format(
 
 // Syntax itself:
     // const options = { ... }
-    // new Intl.DateTimeFormat("language-REGION"*, configuration options (can be Object) ).format(the date we want to format).  // TIP: *: language-REGION ===calls===> (local string) which comes from ISO language code table (www.lingoes.net), also we can get it from user system via: const local = navigator.language
+    // new Intl.DateTimeFormat("language-REGION"*, configuration options (can be Object) ).format(the date we want to format).  // TIP: *: language-REGION ===calls===> (local string) which comes from ISO language code table (www.lingoes.net), also we can get it from user system via: const local = navigator.language OR any other values in our code.
+    
+    // NOTE: Whitout Configuration options  it will return only date, but with configuration option we can chamge iit even to display time as well
 
-// ------------------------------------- Section 12 - 190 ----------------------------------------------
+// ------------------------------------- Section 12 - 191 ----------------------------------------------
+
+// Same as DateTimeFormat
+// new Intl.NumberFormat('loocal string').format(number)
+
+const options2 = {
+    style: 'unit', // can be 'precent' or 'currency' => currency needs currency property instead of unit property
+    unit: 'mile-per-hour', // can br any unit (only when style is unit)
+    currncy: 'EUR', // only when style is currency
+    useGrouping: false // ca be true (default)
+    // More properties on MDN
+}
