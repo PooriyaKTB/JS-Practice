@@ -91,4 +91,8 @@ console.log(new Intl.DateTimeFormat(local, options).format(
     curDate
 ));
 
+// Syntax itself:
+    // const options = { ... }
+    // new Intl.DateTimeFormat("language-REGION"*, configuration options (can be Object) ).format(the date we want to format).  // TIP: *: language-REGION ===calls===> (local string) which comes from ISO language code table (www.lingoes.net), also we can get it from user system via: const local = navigator.language
+
 // ------------------------------------- Section 12 - 190 ----------------------------------------------
