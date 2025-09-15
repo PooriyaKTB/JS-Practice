@@ -92,11 +92,18 @@ const movementsDates = function (date, locale) {
   if (passedDate >= 1 && passedDate < 2) return `Yesterday`;
   if (passedDate >= 2 && passedDate < 7) return `${passedDate} Days ago`;
 
-/*   const year = date.getFullYear();
+  /*   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `On ${day}/${month}/${year}`; */
-  return new Intl.DateTimeFormat(locale).format(date)
+  return new Intl.DateTimeFormat(locale).format(date);
+};
+
+const formatCurrency = function (value, local, currency) {
+  return new Intl.NumberFormat(local, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -113,12 +120,14 @@ const displayMovements = function (acc, sort = false) {
 
   if (sort) combinedMovsDates.sort((a, b) => a.movement - b.movement);
 
-  combinedMovsDates.forEach(function ({ movement, date }, i) {
-    const type = movement > 0 ? 'deposit' : 'withdrawal';
+  combinedMovsDates.forEach(function ({ movement: mov, date }, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const curDate = new Date(date);
 
     const showingDate = movementsDates(curDate, acc.locale);
+
+    const formatedMovement = formatCurrency(mov, acc.locale, acc.currency);
 
     const html = `
       <div class="movements__row">
@@ -126,7 +135,7 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
         <div calss="movements__date">${showingDate}</div>
-        <div class="movements__value">${movement.toFixed(2)}€</div>
+        <div class="movements__value">${formatedMovement}</div>
       </div>
     `;
 
@@ -136,7 +145,7 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  labelBalance.textContent = formatCurrency(acc.balance, acc.locale, acc.currency);
 };
 
 const calcDisplaySummary = function (acc) {
@@ -190,12 +199,12 @@ let currentAccount;
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
-  
+
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-  
+
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
@@ -212,20 +221,21 @@ btnLogin.addEventListener('click', function (e) {
     
     labelDate.textContent = `${day}/${month}/${year}   ${hour}:${minute}`;
     */
-   
-   const curDate = new Date();
-   const options = {
+
+    const curDate = new Date();
+    const options = {
       hour: 'numeric',
       minute: 'numeric',
       day: 'numeric',
-      month: 'numeric', 
+      month: 'numeric',
       year: 'numeric',
       // weekday: 'long',
     };
-    
-    labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(
-      curDate
-    );
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(curDate);
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
