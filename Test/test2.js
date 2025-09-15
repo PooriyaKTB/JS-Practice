@@ -28,15 +28,15 @@ console.log(90071992547409953); // more that 2**53 cause wierd result
 console.log(Number.MAX_SAFE_INTEGER);
 
 // Extra info:
-    // Smallest "+" number:
-        const min = 2 ** -1074;
-        console.log(min); // 5e-324
+// Smallest "+" number:
+const min = 2 ** -1074;
+console.log(min); // 5e-324
 
-    // Smallest number "-" :
-        console.log(Number.MIN_SAFE_INTEGER);
+// Smallest number "-" :
+console.log(Number.MIN_SAFE_INTEGER);
 
-    // Unsafe biggest number:
-        console.log(Number.MAX_VALUE);
+// Unsafe biggest number:
+console.log(Number.MAX_VALUE);
 
 // ------------------------------------- Section 12 - 186 ----------------------------------------------
 
@@ -72,30 +72,26 @@ console.log(calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14)));
 // ------------------------------------- Section 12 - 190 ----------------------------------------------
 
 const options = {
-    hour: "numeric",
-    minute: "numeric",
-    day: "numeric",
-    month: "long", // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
-    year: "numeric", // Can be '2-digit' as well. (like month)
-    weekday: "long", // Can be 'short' OR 'narrow'
+  hour: "numeric",
+  minute: "numeric",
+  day: "numeric",
+  month: "long", // Can be 'numeric' as well to display as number (eg. 8) of month OR '2-digit' to display as number with padStart(2,0) (eg. 08).
+  year: "numeric", // Can be '2-digit' as well. (like month)
+  weekday: "long", // Can be 'short' OR 'narrow'
 };
 
 const curDate = new Date();
 
-console.log(new Intl.DateTimeFormat("en-GB", options).format(
-    curDate
-)); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
+console.log(new Intl.DateTimeFormat("en-GB", options).format(curDate)); //internationalisation Date, we passed local string into Intl.DateTimeFormat function as language-REGION for first argument AND option Object as second argument to customise output. also we passed the date that we want to format into .format
 
 const local = navigator.language; // To get browser local strting in language-REGION fromat.
-console.log(new Intl.DateTimeFormat(local, options).format(
-    curDate
-));
+console.log(new Intl.DateTimeFormat(local, options).format(curDate));
 
 // Syntax itself:
-    // const options = { ... }
-    // new Intl.DateTimeFormat("language-REGION"*, configuration options (can be Object) ).format(the date we want to format).  // TIP: *: language-REGION ===calls===> (local string) which comes from ISO language code table (www.lingoes.net), also we can get it from user system via: const local = navigator.language OR any other values in our code.
-    
-    // NOTE: Whitout Configuration options  it will return only date, but with configuration option we can chamge iit even to display time as well
+// const options = { ... }
+// new Intl.DateTimeFormat("language-REGION"*, configuration options (can be Object) ).format(the date we want to format).  // TIP: *: language-REGION ===calls===> (local string) which comes from ISO language code table (www.lingoes.net), also we can get it from user system via: const local = navigator.language OR any other values in our code.
+
+// NOTE: Whitout Configuration options  it will return only date, but with configuration option we can chamge iit even to display time as well
 
 // ------------------------------------- Section 12 - 191 ----------------------------------------------
 
@@ -103,9 +99,17 @@ console.log(new Intl.DateTimeFormat(local, options).format(
 // new Intl.NumberFormat('loocal string').format(number)
 
 const options2 = {
-    style: 'unit', // can be 'precent' or 'currency' => currency needs currency property instead of unit property
-    unit: 'mile-per-hour', // can br any unit (only when style is unit)
-    currncy: 'EUR', // only when style is currency
-    useGrouping: false // ca be true (default)
-    // More properties on MDN
-}
+  style: "unit", // can be 'precent' or 'currency' => currency needs currency property instead of unit property
+  unit: "mile-per-hour", // can br any unit (only when style is unit)
+  currncy: "EUR", // only when style is currency
+  useGrouping: false, // ca be true (default)
+  // More properties on MDN
+};
+
+// ------------------------------------- Section 12 - 192 ----------------------------------------------
+
+setTimeout(callback, time in milliseconds); // this timer runs just once after a defned time => use to execute code at some point in the future. it get callBack
+setInterval(); // this timer keeps running getDocFromServer, until we stop it
+
+setTimeout(() => console.log("Ready"), 3000);
+console.log("Wait...");
