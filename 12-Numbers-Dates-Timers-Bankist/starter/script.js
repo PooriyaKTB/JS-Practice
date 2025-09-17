@@ -209,18 +209,20 @@ const updateUI = function (acc) {
 let currentAccount;
 
 const logOutTimer = function () {
-  let time = 300;
-  const remainTime = setInterval(() => {
+  let time = 10;
+  const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
     const sec = String(time % 60).padStart(2, 0);
     labelTimer.textContent = `${min}:${sec}`;
-    time--;
-    if (time < 0) {
+    if (time === 0) {
       clearInterval(remainTime, 1000);
       labelWelcome.textContent = `Log in to get started`;
       containerApp.style.opacity = 0;
     }
-  }, 1000);
+    time--;
+  };
+  tick();
+  const remainTime = setInterval(tick, 1000);
 };
 
 btnLogin.addEventListener('click', function (e) {
