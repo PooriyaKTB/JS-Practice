@@ -108,8 +108,13 @@ const options2 = {
 
 // ------------------------------------- Section 12 - 192 ----------------------------------------------
 
-setTimeout(callback, time in milliseconds); // this timer runs just once after a defned time => use to execute code at some point in the future. it get callBack
-setInterval(); // this timer keeps running getDocFromServer, until we stop it
+// setTimeout(callback, time in milliseconds); // this timer runs just once,after the defined time => use to execute code at some point in the future. it gets callBack. NOTE: it does NOT stop execution.
+// setInterval(); // this timer keeps running getDocFromServer, until we stop it
 
 setTimeout(() => console.log("Ready"), 3000);
 console.log("Wait...");
+
+// eg:
+const ingredients = ['spinach','olives']
+const pizzaTimer = setTimeout((ing1,ing2)=> console.log(`Your pizza with ${ing1} and ${ing2} is ready!`),3000,...ingredients)
+if(ingredients.includes('spinach')) clearTimeout(pizzaTimer) //canceling timeout via clearTimeout()
