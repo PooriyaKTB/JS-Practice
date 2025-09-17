@@ -223,7 +223,7 @@ const logOutTimer = function () {
   };
   tick();
   const remainTime = setInterval(tick, 1000);
-  return remainTime
+  return remainTime;
 };
 
 btnLogin.addEventListener('click', function (e) {
@@ -272,7 +272,7 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.blur();
 
     // Update UI
-    if (remainTime) clearInterval(remainTime)
+    if (remainTime) clearInterval(remainTime);
     remainTime = logOutTimer();
     updateUI(currentAccount);
   }
@@ -301,6 +301,9 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    clearInterval(remainTime);
+    remainTime = logOutTimer();
   }
 });
 
@@ -318,6 +321,9 @@ btnLoan.addEventListener('click', function (e) {
 
       // Update UI
       updateUI(currentAccount);
+
+      clearInterval(remainTime);
+      remainTime = logOutTimer();
     }, 2500);
   }
   inputLoanAmount.value = '';
