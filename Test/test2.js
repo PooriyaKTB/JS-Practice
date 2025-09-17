@@ -128,7 +128,7 @@ if (ingredients.includes("spinach")) clearTimeout(pizzaTimer); //canceling timeo
 
 const clock = function () {
   const now = new Date();
-  return (`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
+  return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 };
 
 const displayClock = setInterval(() => console.log(clock()), 1000);

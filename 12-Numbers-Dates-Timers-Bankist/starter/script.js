@@ -208,6 +208,21 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+const logOutTimer = function () {
+  let time = 300;
+  const remainTime = setInterval(() => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${sec}`;
+    time--;
+    if (time < 0) {
+      clearInterval(remainTime, 1000);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+  }, 1000);
+};
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -254,6 +269,7 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.blur();
 
     // Update UI
+    logOutTimer();
     updateUI(currentAccount);
   }
 });
