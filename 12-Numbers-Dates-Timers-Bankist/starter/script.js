@@ -206,10 +206,10 @@ const updateUI = function (acc) {
 
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, remainTime;
 
 const logOutTimer = function () {
-  let time = 10;
+  let time = 300;
   const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
     const sec = String(time % 60).padStart(2, 0);
@@ -223,6 +223,7 @@ const logOutTimer = function () {
   };
   tick();
   const remainTime = setInterval(tick, 1000);
+  return remainTime
 };
 
 btnLogin.addEventListener('click', function (e) {
@@ -271,7 +272,8 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.blur();
 
     // Update UI
-    logOutTimer();
+    if (remainTime) clearInterval(remainTime)
+    remainTime = logOutTimer();
     updateUI(currentAccount);
   }
 });
