@@ -54,8 +54,11 @@ message.innerHTML =
 
 const header = document.querySelector('.header')
 header.prepend(message)
-// header.append(message)
+header.append(message)
 // header.append(message.cloneNode(true)) // To have prepend and append at same time, so we need to copy the element via cloneNode() and set it to true. so that all the child elements will also be copied.
 
 header.before(message)
-header.after(message)
+header.after(message) // This position will applied, because element can NOT be in more than one place simultaneously and somehow it will be repositioned
+
+// Delete Elements
+document.querySelector('.btn--close-cookie').addEventListener('click', ()=> message.remove()) // old way of removing element: message.parentElement.removeChild(mesaage)
