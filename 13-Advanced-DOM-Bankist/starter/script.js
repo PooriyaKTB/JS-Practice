@@ -62,3 +62,14 @@ header.after(message) // This position will applied, because element can NOT be 
 
 // Delete Elements
 document.querySelector('.btn--close-cookie').addEventListener('click', ()=> message.remove()) // old way of removing element: message.parentElement.removeChild(mesaage)
+
+// Styles
+
+message.style.backgroundColor = '#37383d' // SelectElement.Style.AttributeName = 'value'   NOTE: attriibuteName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
+message.style.width = '120%'
+
+console.log(message.style.color); // Nothing will appear in console
+console.log(message.style.width); // The value will appear in console BECAUSE we can only access the style valuee that we set manually ourselve, but can NOT get a style that is hidden inside of a class (sets in CSS)
+
+console.log(getComputedStyle(message).color); // we can get style written in CSS via getComputedStyle(ELEMENT).PROPERTY  NOTE: as name says, it will return computed property value, so even if we did not declare it any whee, it will return the value that already exist and has been set automatically by browser
+message.style.height = Number.parseFloat(getComputedStyle(message).height) + 30 + 'px'
