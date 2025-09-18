@@ -99,3 +99,15 @@ console.log(logo.getAttribute('src')); // Will return relative URL (exactly same
 const link = document.querySelector('.nav__link--btn')
 console.log(link.href);
 console.log(link.getAttribute('href'));
+
+// Data attributes
+console.log(logo.dataset.versionNumber); // NOTE we write everything comes after data- exactly the same BUT in camelCase
+
+// Classes
+logo.classList.add('first', 'second', 'if-more') // argument can be only one or more
+logo.classList.remove('first', 'second', 'if-more') // argument can be only one or more
+logo.classList.toggle('first')
+logo.classList.contains('first')
+
+// DONT USE
+logo.className = 'Pooriya' // Because it will override all the existing classes
