@@ -29,3 +29,16 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// Selecting Elemetns
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
+const allButtons = document.getElementsByTagName('button')
+const allButtons2 = document.getElementsByClassName('btn')
+console.log(allButtons);
+console.log(allButtons2);
+
