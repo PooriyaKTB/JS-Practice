@@ -50,32 +50,52 @@ const message = document.createElement('div');
 message.classList.add('cookie-message');
 message.textContent = 'This is cookie message!';
 message.innerHTML =
-'This is a cookie message. <button class="btn btn--close-cookie">Got it!</button>';
+  'This is a cookie message. <button class="btn btn--close-cookie">Got it!</button>';
 
-const header = document.querySelector('.header')
-header.prepend(message)
-header.append(message)
+const header = document.querySelector('.header');
+header.prepend(message);
+header.append(message);
 // header.append(message.cloneNode(true)) // To have prepend and append at same time, so we need to copy the element via cloneNode() and set it to true. so that all the child elements will also be copied.
 
-header.before(message)
-header.after(message) // This position will applied, because element can NOT be in more than one place simultaneously and somehow it will be repositioned
+header.before(message);
+header.after(message); // This position will applied, because element can NOT be in more than one place simultaneously and somehow it will be repositioned
 
 // Delete Elements
-document.querySelector('.btn--close-cookie').addEventListener('click', ()=> message.remove()) // old way of removing element: message.parentElement.removeChild(mesaage)
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', () => message.remove()); // old way of removing element: message.parentElement.removeChild(mesaage)
 
 // Styles
 
-message.style.backgroundColor = '#37383d' // SelectElement.Style.AttributeName = 'value'   NOTE: attriibuteName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
-message.style.width = '120%'
+message.style.backgroundColor = '#37383d'; // SelectElement.Style.AttributeName = 'value'   NOTE: attriibuteName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
+message.style.width = '120%';
 
 console.log(message.style.color); // Nothing will appear in console
 console.log(message.style.width); // The value will appear in console BECAUSE we can only access the style valuee that we set manually ourselve, but can NOT get a style that is hidden inside of a class (sets in CSS)
 
 console.log(getComputedStyle(message).color); // we can get style written in CSS via getComputedStyle(ELEMENT).PROPERTY  NOTE: as name says, it will return computed property value, so even if we did not declare it any whee, it will return the value that already exist and has been set automatically by browser
-message.style.height = Number.parseFloat(getComputedStyle(message).height) + 30 + 'px' // We need to parse the Number, because it will return string, but we don't need.
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px'; // We need to parse the Number, because it will return string, but we don't need.
 
-document.documentElement.style.setProperty('--color-primary', 'orangered') // To chage custom properties we use setProperty('the property we want to change', 'the new value we want to set to it')
-
+document.documentElement.style.setProperty('--color-primary', 'orangered'); // To chage custom properties we use setProperty('the property we want to change', 'the new value we want to set to it')
 
 // Attributes
 
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src); // Will return absolute URL
+console.log(logo.className);
+
+logo.alt = "Beautifull minimalist logo"
+
+console.log(logo.designer); // As its not standard attribute, it will be undefined
+console.log(logo.getAttribute('designer')); // But we can access it this way
+
+logo.setAttribute('company', 'Bankist') // Set new attribute to a property via setAttribute('attribute name', 'value')
+
+console.log(logo.src); // Will return absolute URL
+console.log(logo.getAttribute('src')); // Will return relative URL (exactly same as exist in HTML file)
+// These two (.src & .getAttribute()) work same (as src) for href as well:
+const link = document.querySelector('.nav__link--btn')
+console.log(link.href);
+console.log(link.getAttribute('href'));
