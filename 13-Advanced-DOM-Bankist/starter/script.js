@@ -30,8 +30,13 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+
 // Selecting Elemetns
 
+console.log(document);
 console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
@@ -66,7 +71,6 @@ document
   .addEventListener('click', () => message.remove()); // old way of removing element: message.parentElement.removeChild(mesaage)
 
 // Styles
-
 message.style.backgroundColor = '#37383d'; // SelectElement.Style.AttributeName = 'value'   NOTE: attriibuteName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
 message.style.width = '120%';
 
@@ -86,17 +90,17 @@ console.log(logo.alt);
 console.log(logo.src); // Will return absolute URL
 console.log(logo.className);
 
-logo.alt = "Beautifull minimalist logo"
+logo.alt = 'Beautifull minimalist logo';
 
 console.log(logo.designer); // As its not standard attribute, it will be undefined
 console.log(logo.getAttribute('designer')); // But we can access it this way
 
-logo.setAttribute('company', 'Bankist') // Set new attribute to a property via setAttribute('attribute name', 'value')
+logo.setAttribute('company', 'Bankist'); // Set new attribute to a property via setAttribute('attribute name', 'value')
 
 console.log(logo.src); // Will return absolute URL
 console.log(logo.getAttribute('src')); // Will return relative URL (exactly same as exist in HTML file)
 // These two (.src & .getAttribute()) work same (as src) for href as well:
-const link = document.querySelector('.nav__link--btn')
+const link = document.querySelector('.nav__link--btn');
 console.log(link.href);
 console.log(link.getAttribute('href'));
 
@@ -104,10 +108,10 @@ console.log(link.getAttribute('href'));
 console.log(logo.dataset.versionNumber); // NOTE we write everything comes after data- exactly the same BUT in camelCase
 
 // Classes
-logo.classList.add('first', 'second', 'if-more') // argument can be only one or more
-logo.classList.remove('first', 'second', 'if-more') // argument can be only one or more
-logo.classList.toggle('first')
-logo.classList.contains('first')
+logo.classList.add('first', 'second', 'if-more'); // argument can be only one or more
+logo.classList.remove('first', 'second', 'if-more'); // argument can be only one or more
+logo.classList.toggle('first');
+logo.classList.contains('first');
 
 // DONT USE
-logo.className = 'Pooriya' // Because it will override all the existing classes
+logo.className = 'Pooriya'; // Because it will override all the existing classes
