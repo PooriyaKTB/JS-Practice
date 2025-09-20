@@ -28,7 +28,7 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
   }
-});
+}); 
 
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -41,17 +41,18 @@ console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
 
-const allSections = document.querySelectorAll('.section');
+const allSections = document.querySelectorAll('.section'); // It will return a node list, which contains all of the elements that are in a section
 console.log(allSections);
-const allButtons = document.getElementsByTagName('button');
-const allButtons2 = document.getElementsByClassName('btn');
+document.getElementById('#section--1');
+const allButtons = document.getElementsByTagName('button'); // It return HTML collection, NOT node list. (if DOM changes (even programmatically), the collection will automatically update immediately)
+const allButtons2 = document.getElementsByClassName('btn'); // It return HTML collection, NOT node list. (if DOM changes (even programmatically), the collection will automatically update immediately)
 console.log(allButtons);
 console.log(allButtons2);
 
 // Creating and Inserting Elements
 
 // .insertAdjacentHTML
-const message = document.createElement('div');
+const message = document.createElement('div'); // Create a DOM element, store it into a variable, BUT the element is NOT yet anywhere in DOM. So we need to manually insert it into the page.
 message.classList.add('cookie-message');
 message.textContent = 'This is cookie message!';
 message.innerHTML =
@@ -71,17 +72,17 @@ document
   .addEventListener('click', () => message.remove()); // old way of removing element: message.parentElement.removeChild(mesaage)
 
 // Styles
-message.style.backgroundColor = '#37383d'; // SelectElement.Style.AttributeName = 'value'   NOTE: attriibuteName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
+message.style.backgroundColor = '#37383d'; // SelectElement.Style.AttributeName = 'value'   NOTE: attributeName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
 message.style.width = '120%';
 
 console.log(message.style.color); // Nothing will appear in console
-console.log(message.style.width); // The value will appear in console BECAUSE we can only access the style valuee that we set manually ourselve, but can NOT get a style that is hidden inside of a class (sets in CSS)
+console.log(message.style.width); // The value will appear in console BECAUSE we can only access the style value that we set manually ourselve, but can NOT get a style that is hidden inside of a class (sets in CSS)
 
-console.log(getComputedStyle(message).color); // we can get style written in CSS via getComputedStyle(ELEMENT).PROPERTY  NOTE: as name says, it will return computed property value, so even if we did not declare it any whee, it will return the value that already exist and has been set automatically by browser
+console.log(getComputedStyle(message).color); // we can get style written in CSS via getComputedStyle(ELEMENT).PROPERTY  NOTE: as name says, it will return computed (by browser) property value, so even if we did not declare it anywhere, it will return the value that already exist and has been set automatically by browser
 message.style.height =
-  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px'; // We need to parse the Number, because it will return string, but we don't need.
+  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px'; // We need to parse the Number, because it (getComputedStyle(message).height) will return string, but we don't need.
 
-document.documentElement.style.setProperty('--color-primary', 'orangered'); // To chage custom properties we use setProperty('the property we want to change', 'the new value we want to set to it')
+document.documentElement.style.setProperty('--color-primary', 'orangered'); // To change custom properties we use setProperty('the property we want to change', 'the new value we want to set to it')
 
 // Attributes
 
@@ -105,7 +106,7 @@ console.log(link.href);
 console.log(link.getAttribute('href'));
 
 // Data attributes
-console.log(logo.dataset.versionNumber); // NOTE we write everything comes after data- exactly the same BUT in camelCase
+console.log(logo.dataset.versionNumber); // NOTE we write everything comes after data- exactly the same BUT in camelCase. NOTE: data is special attribute, and must start with 'data-' in HTML
 
 // Classes
 logo.classList.add('first', 'second', 'if-more'); // argument can be only one or more
@@ -114,4 +115,4 @@ logo.classList.toggle('first');
 logo.classList.contains('first');
 
 // DONT USE
-logo.className = 'Pooriya'; // Because it will override all the existing classes
+logo.className = 'Pooriya'; // Because it will overwrite all the existing classes
