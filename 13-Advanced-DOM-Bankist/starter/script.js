@@ -37,6 +37,16 @@ scrollToBtn.addEventListener('click', () =>
 );
 
 ///////////////////////////////////////
+
+document.querySelectorAll('.nav__link').forEach(el =>
+  el.addEventListener('click', function (e) {
+    e.preventDefault(); // we have to prevent the default behavior, because what it does is just jump to the part based on href attribute already written in HTML file.
+    const ref = this.getAttribute('href') // Can NOT use this.href , becuase we don't need absolute URL.
+    document.querySelector(ref).scrollIntoView({behavior: 'smooth'})
+  })
+); 
+
+///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
 /* 
@@ -126,7 +136,7 @@ logo.className = 'Pooriya'; // Because it will overwrite all the existing classe
 
 // ----- Handeling Events -----
 // ----- firest way -----
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 // h1.addEventListener('mouseenter' , () => alert(`you are welcome`))
 
 // ----- other way -----
@@ -145,10 +155,9 @@ const h1 = document.querySelector('h1');
 
 // ----- other way -----
 // const h1alert = function () {
-  //   alert(`you are welcome`);
-  // };
-  
-  // h1.addEventListener('mouseenter', h1alert);
-  
-  // setTimeout(() => h1.removeEventListener('mouseenter', h1alert), 3000);
-  
+//   alert(`you are welcome`);
+// };
+
+// h1.addEventListener('mouseenter', h1alert);
+
+// setTimeout(() => h1.removeEventListener('mouseenter', h1alert), 3000);
