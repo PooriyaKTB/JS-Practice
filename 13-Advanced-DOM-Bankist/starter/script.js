@@ -37,7 +37,7 @@ scrollToBtn.addEventListener('click', () =>
 );
 
 ///////////////////////////////////////
-
+/* 
 document.querySelectorAll('.nav__link').forEach(el =>
   el.addEventListener('click', function (e) {
     e.preventDefault(); // we have to prevent the default behavior, because what it does is just jump to the part based on href attribute already written in HTML file.
@@ -45,6 +45,21 @@ document.querySelectorAll('.nav__link').forEach(el =>
     document.querySelector(ref).scrollIntoView({behavior: 'smooth'})
   })
 ); 
+*/
+// But it is NOT efficient solution above, so that we need to use events delegation. the better solution with event delegation ( which is based on the fact that enevts bubble up) is as below:
+//1. Add eventListener tot common parent element
+//2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log(e.target);
+
+  if (e.target.classList.contains('nav__link')) {   // Matching strategy, to ignore unwanted clicks (click somewhere apart from links that we want)
+    const targetEl = e.target.getAttribute('href');
+    console.log(targetEl);
+    document.querySelector(targetEl).scrollIntoView({ behavior: 'smooth' });
+  }
+});
 
 ///////////////////////////////////////
 ///////////////////////////////////////
