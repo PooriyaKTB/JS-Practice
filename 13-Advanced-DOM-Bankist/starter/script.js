@@ -123,3 +123,32 @@ logo.classList.contains('first');
 // DONT USE
 logo.className = 'Pooriya'; // Because it will overwrite all the existing classes
  */
+
+// ----- Handeling Events -----
+// ----- firest way -----
+const h1 = document.querySelector('h1');
+// h1.addEventListener('mouseenter' , () => alert(`you are welcome`))
+
+// ----- other way -----
+// h1.mouseenter = function(){
+//   alert (`you are welcome`)
+// }
+
+// ----- other way -----
+// const h1alert = function () {
+//   alert(`you are welcome`);
+
+//   h1.removeEventListener('mouseenter', h1alert);
+// };
+
+// h1.addEventListener('mouseenter', h1alert)
+
+// ----- other way -----
+// const h1alert = function () {
+  //   alert(`you are welcome`);
+  // };
+  
+  // h1.addEventListener('mouseenter', h1alert);
+  
+  // setTimeout(() => h1.removeEventListener('mouseenter', h1alert), 3000);
+  
