@@ -140,7 +140,8 @@ setTimeout(() => clearInterval(displayClock), 10000);
 //----------Stop event Propagation------------
 // NOTE: It's recommeneded to only stop propagation when really have to.
 
-document.querySelector("_").addEventListener("click", function (e) {  // instead of "_" we write our element name
+document.querySelector("_").addEventListener("click", function (e) {
+  // instead of "_" we write our element name
   this.style.backgroundcolor = "red";
   console.loge(e.target, e.currentTarget);
 

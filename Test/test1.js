@@ -1126,24 +1126,24 @@ console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
 
-const allSections = document.querySelectorAll('.section'); // It will return a node list, which contains all of the elements that are in a section
+const allSections = document.querySelectorAll(".section"); // It will return a node list, which contains all of the elements that are in a section
 console.log(allSections);
-document.getElementById('#section--1');
-const allButtons = document.getElementsByTagName('button'); // It return HTML collection, NOT node list. (if DOM changes (even programmatically), the collection will automatically update immediately)
-const allButtons2 = document.getElementsByClassName('btn'); // It return HTML collection, NOT node list. (if DOM changes (even programmatically), the collection will automatically update immediately)
+document.getElementById("#section--1");
+const allButtons = document.getElementsByTagName("button"); // It return HTML collection, NOT node list. (if DOM changes (even programmatically), the collection will automatically update immediately)
+const allButtons2 = document.getElementsByClassName("btn"); // It return HTML collection, NOT node list. (if DOM changes (even programmatically), the collection will automatically update immediately)
 console.log(allButtons);
 console.log(allButtons2);
 
 // Creating and Inserting Elements
 
 // .insertAdjacentHTML
-const message = document.createElement('div'); // Create a DOM element, store it into a variable, BUT the element is NOT yet anywhere in DOM. So we need to manually insert it into the page.
-message.classList.add('cookie-message');
-message.textContent = 'This is cookie message!';
+const message = document.createElement("div"); // Create a DOM element, store it into a variable, BUT the element is NOT yet anywhere in DOM. So we need to manually insert it into the page.
+message.classList.add("cookie-message");
+message.textContent = "This is cookie message!";
 message.innerHTML =
   'This is a cookie message. <button class="btn btn--close-cookie">Got it!</button>';
 
-const header = document.querySelector('.header');
+const header = document.querySelector(".header");
 header.prepend(message);
 header.append(message);
 // header.append(message.cloneNode(true)) // To have prepend and append at same time, so we need to copy the element via cloneNode() and set it to true. so that all the child elements will also be copied.
@@ -1153,51 +1153,53 @@ header.after(message); // This position will applied, because element can NOT be
 
 // Delete Elements
 document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', () => message.remove()); // old way of removing element: message.parentElement.removeChild(mesaage)
+  .querySelector(".btn--close-cookie")
+  .addEventListener("click", () => message.remove()); // old way of removing element: message.parentElement.removeChild(mesaage)
 
 // Styles
-message.style.backgroundColor = '#37383d'; // SelectElement.Style.AttributeName = 'value'   NOTE: attributeName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
-message.style.width = '120%';
+message.style.backgroundColor = "#37383d"; // SelectElement.Style.AttributeName = 'value'   NOTE: attributeName must be writen in camelCase. AND remember in this way Styles gonna set as inline styles.
+message.style.width = "120%";
 
 console.log(message.style.color); // Nothing will appear in console
 console.log(message.style.width); // The value will appear in console BECAUSE we can only access the style value that we set manually ourselve, but can NOT get a style that is hidden inside of a class (sets in CSS)
 
 console.log(getComputedStyle(message).color); // we can get style written in CSS via getComputedStyle(ELEMENT).PROPERTY  NOTE: as name says, it will return computed (by browser) property value, so even if we did not declare it anywhere, it will return the value that already exist and has been set automatically by browser
 message.style.height =
-  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px'; // We need to parse the Number, because it (getComputedStyle(message).height) will return string, but we don't need.
+  Number.parseFloat(getComputedStyle(message).height) + 30 + "px"; // We need to parse the Number, because it (getComputedStyle(message).height) will return string, but we don't need.
 
-document.documentElement.style.setProperty('--color-primary', 'orangered'); // To change custom properties we use setProperty('the property we want to change', 'the new value we want to set to it')
+document.documentElement.style.setProperty("--color-primary", "orangered"); // To change custom properties we use setProperty('the property we want to change', 'the new value we want to set to it')
 
 // Attributes
 
-const logo = document.querySelector('.nav__logo');
+const logo = document.querySelector(".nav__logo");
 console.log(logo.alt);
 console.log(logo.src); // Will return absolute URL
 console.log(logo.className);
 
-logo.alt = 'Beautifull minimalist logo';
+logo.alt = "Beautifull minimalist logo";
 
 console.log(logo.designer); // As its not standard attribute, it will be undefined
-console.log(logo.getAttribute('designer')); // But we can access it this way
+console.log(logo.getAttribute("designer")); // But we can access it this way
 
-logo.setAttribute('company', 'Bankist'); // Set new attribute to a property via setAttribute('attribute name', 'value')
+logo.setAttribute("company", "Bankist"); // Set new attribute to a property via setAttribute('attribute name', 'value')
 
 console.log(logo.src); // Will return absolute URL
-console.log(logo.getAttribute('src')); // Will return relative URL (exactly same as exist in HTML file)
+console.log(logo.getAttribute("src")); // Will return relative URL (exactly same as exist in HTML file)
 // These two (.src & .getAttribute()) work same (as src) for href as well:
-const link = document.querySelector('.nav__link--btn');
+const link = document.querySelector(".nav__link--btn");
 console.log(link.href);
-console.log(link.getAttribute('href'));
+console.log(link.getAttribute("href"));
 
 // Data attributes
 console.log(logo.dataset.versionNumber); // NOTE we write everything comes after data- exactly the same BUT in camelCase
 
 // Classes
-logo.classList.add('first', 'second', 'if-more'); // argument can be only one or more
-logo.classList.remove('first', 'second', 'if-more'); // argument can be only one or more
-logo.classList.toggle('first');
-logo.classList.contains('first');
+logo.classList.add("first", "second", "if-more"); // argument can be only one or more
+logo.classList.remove("first", "second", "if-more"); // argument can be only one or more
+logo.classList.toggle("first");
+logo.classList.contains("first");
 
 // DONT USE
-logo.className = 'Pooriya'; // Because it will overwrite all the existing classes
+logo.className = "Pooriya"; // Because it will overwrite all the existing classes
+
+// ------------------------------------- Section 13 - 205 ----------------------------------------------

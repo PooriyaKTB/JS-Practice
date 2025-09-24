@@ -54,7 +54,8 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
   console.log(e.target);
 
-  if (e.target.classList.contains('nav__link')) {   // Matching strategy, to ignore unwanted clicks (click somewhere apart from links that we want)
+  if (e.target.classList.contains('nav__link')) {
+    // Matching strategy, to ignore unwanted clicks (click somewhere apart from links that we want)
     const targetEl = e.target.getAttribute('href');
     console.log(targetEl);
     document.querySelector(targetEl).scrollIntoView({ behavior: 'smooth' });
@@ -176,3 +177,37 @@ logo.className = 'Pooriya'; // Because it will overwrite all the existing classe
 // h1.addEventListener('mouseenter', h1alert);
 
 // setTimeout(() => h1.removeEventListener('mouseenter', h1alert), 3000);
+
+// ------------------------------------- Section 13 - 205 ----------------------------------------------
+
+const h1 = document.querySelector('h1');
+
+// Going downward: child
+console.log('what we Can select:');
+console.log(document.querySelector('h1'));
+console.log('--------------------------');
+console.log(h1.querySelectorAll('.highlight')); // note that querySelector works on elements as well, not only document.
+console.log(h1.childNodes); // not much used
+console.log(h1.children); // return HTML collection of ONLY direct children
+console.log(h1.firstElementChild);
+console.log(h1.lastElementChild);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upward: parent
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+console.log(h1.closest('.header'));
+console.log(h1.closest('h1')); // gonna be the element itself
+// h1.closest('.header').style.background = 'var(--gradient-secondary)'
+
+// Going upward: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+//in case of reading all siblings, we can use a trick: going up to parent element and then read all children
+console.log(h1.parentElement.children);
