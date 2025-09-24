@@ -211,3 +211,7 @@ console.log(h1.nextSibling);
 
 //in case of reading all siblings, we can use a trick: going up to parent element and then read all children
 console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach(function(el){
+  if (el !== h1) el.style.transform = 'scale(0.5)'
+})
