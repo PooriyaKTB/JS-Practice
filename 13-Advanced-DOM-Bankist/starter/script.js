@@ -62,6 +62,45 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
+// Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+/* 
+// NOTE: remainder of bad practice:
+tabs.forEach(t =>
+  t.addEventListener('click', e => {
+    e.preventDefault();
+    console.log('tab');
+  })
+);
+// its bad, iimagine having 200 tabs! then 200 copies of event handler callback function
+ */
+
+// here is best practice solution (event deligation):
+
+tabsContainer.addEventListener('click', e => {
+  const clickedBadWay = e.target;
+  //console.log(clickedBadWay)  as it's obviouse, the button has span inside, so if user click on span nothing happen. to solve it:
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  if (!clicked) return; // Guard clause
+
+  // Remove active classes (for tabs and contents)
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+  
+  // Active tab
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  console.log(clicked.dataset.tab);
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -180,6 +219,7 @@ logo.className = 'Pooriya'; // Because it will overwrite all the existing classe
 
 // ------------------------------------- Section 13 - 205 ----------------------------------------------
 
+/* 
 const h1 = document.querySelector('h1');
 
 // Going downward: child
@@ -215,3 +255,6 @@ console.log(h1.parentElement.children);
 [...h1.parentElement.children].forEach(function(el){
   if (el !== h1) el.style.transform = 'scale(0.5)'
 })
+ */
+
+// ------------------------------------- Section 13 - 206 ----------------------------------------------

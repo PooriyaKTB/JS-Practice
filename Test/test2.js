@@ -141,9 +141,34 @@ setTimeout(() => clearInterval(displayClock), 10000);
 // NOTE: It's recommeneded to only stop propagation when really have to.
 
 document.querySelector("_").addEventListener("click", function (e) {
-  // instead of "_" we write our element name
-  this.style.backgroundcolor = "red";
-  console.loge(e.target, e.currentTarget);
+    // instead of "_" we write our element name
+    this.style.backgroundcolor = "red";
+    console.loge(e.target, e.currentTarget);
+    
+    e.stopPropagation();
+});
 
-  e.stopPropagation();
+// ------------------------------------- Section 13 - 206 ----------------------------------------------
+// Tabbed Component
+
+tabsContainer.addEventListener('click', e => {
+  const clickedBadWay = e.target;
+  //console.log(clickedBadWay)  as it's obviouse, the button has span inside, so if user click on span nothing happen. to solve it:
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  if (!clicked) return; // Guard clause
+
+  // Remove active classes (for tabs and contents)
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+  
+  // Active tab
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  console.log(clicked.dataset.tab);
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
