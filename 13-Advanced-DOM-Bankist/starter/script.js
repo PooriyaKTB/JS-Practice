@@ -103,7 +103,7 @@ tabsContainer.addEventListener('click', e => {
 });
 
 // Menu fade animation
-const hoverHandle = function (e, opacity) {
+const hoverHandle = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
@@ -117,6 +117,17 @@ const hoverHandle = function (e, opacity) {
 };
 nav.addEventListener('mouseover', hoverHandle.bind(0.5));
 nav.addEventListener('mouseout', hoverHandle.bind(1));
+
+// Sticky nav
+window.addEventListener('scroll', () => {
+  if (window.scrollY > section1.getBoundingClientRect().top) {
+    nav.classList.add('sticky');
+    nav.style.opacity = 0.8;
+  } else {
+    nav.classList.remove('sticky');
+    nav.style.opacity = 1;
+  }
+});
 
 ///////////////////////////////////////
 ///////////////////////////////////////
