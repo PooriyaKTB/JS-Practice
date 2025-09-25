@@ -8,7 +8,11 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const scrollToBtn = document.querySelector('.btn--scroll-to');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -63,9 +67,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 // Tabbed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
 /* 
 // NOTE: remainder of bad practice:
 tabs.forEach(t =>
@@ -102,24 +103,20 @@ tabsContainer.addEventListener('click', e => {
 });
 
 // Menu fade animation
-const nav = document.querySelector('.nav');
-
-nav.addEventListener('mouseover', e => {
+const hoverHandle = function (e, opacity) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
     const logo = link.closest('.nav').querySelector('img');
 
-    siblings.forEach((el)=> {
-      if (el !== link)el.style.opacity = 0.5
-    })
-    logo.style.opacity = 0.5
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
   }
-});
-nav.addEventListener('mouseout', e => {
-  const sibling = e.target.closest('nav').querySelectorAll('.nav__link')
-  sibling.forEach((el)=>el.style.opacity = 1)
-});
+};
+nav.addEventListener('mouseover', e => hoverHandle(e, 0.5));
+nav.addEventListener('mouseout', e => hoverHandle(e, 1));
 
 ///////////////////////////////////////
 ///////////////////////////////////////
