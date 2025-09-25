@@ -90,7 +90,7 @@ tabsContainer.addEventListener('click', e => {
   // Remove active classes (for tabs and contents)
   tabs.forEach(t => t.classList.remove('operations__tab--active'));
   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
-  
+
   // Active tab
   clicked.classList.add('operations__tab--active');
 
@@ -99,6 +99,26 @@ tabsContainer.addEventListener('click', e => {
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
+});
+
+// Menu fade animation
+const nav = document.querySelector('.nav');
+
+nav.addEventListener('mouseover', e => {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach((el)=> {
+      if (el !== link)el.style.opacity = 0.5
+    })
+    logo.style.opacity = 0.5
+  }
+});
+nav.addEventListener('mouseout', e => {
+  const sibling = e.target.closest('nav').querySelectorAll('.nav__link')
+  sibling.forEach((el)=>el.style.opacity = 1)
 });
 
 ///////////////////////////////////////
