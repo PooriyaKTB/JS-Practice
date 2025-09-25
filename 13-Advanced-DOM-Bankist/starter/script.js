@@ -110,13 +110,13 @@ const hoverHandle = function (e, opacity) {
     const logo = link.closest('.nav').querySelector('img');
 
     siblings.forEach(el => {
-      if (el !== link) el.style.opacity = opacity;
+      if (el !== link) el.style.opacity = this;
     });
-    logo.style.opacity = opacity;
+    logo.style.opacity = this;
   }
 };
-nav.addEventListener('mouseover', e => hoverHandle(e, 0.5));
-nav.addEventListener('mouseout', e => hoverHandle(e, 1));
+nav.addEventListener('mouseover', hoverHandle.bind(0.5));
+nav.addEventListener('mouseout', hoverHandle.bind(1));
 
 ///////////////////////////////////////
 ///////////////////////////////////////
