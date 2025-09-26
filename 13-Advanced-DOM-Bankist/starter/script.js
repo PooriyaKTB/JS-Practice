@@ -176,11 +176,16 @@ const lazyImg = function (entries, observer) {
   if (!entry.isIntersecting) return;
   // Replace src with data-src
   entry.target.src = entry.target.dataset.src;
-  entry.target.classList.remove('lazy-img')
+  // entry.target.classList.remove('lazy-img') // NOT really good choice, specially for slow networks. instead:
+  entry.target.addEventListener('load', ()=>{
+    entry.target.classList.remove('lazy-img')
+  })
+  observer.unobserve(entry.target)
 };
 const imgObserver = new IntersectionObserver(lazyImg, {
   root: null,
-  threshold: 0.1,
+  threshold: 0,
+  rootMargin: '200px'  // to make sure images load fast and early, so that the user never understand tha we used lazy loading
 });
 imgTargets.forEach(img => imgObserver.observe(img));
 ///////////////////////////////////////
