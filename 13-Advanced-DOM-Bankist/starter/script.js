@@ -169,6 +169,20 @@ allSections.forEach(s => {
   s.classList.add('section--hidden');
 });
 
+// Lazy loading images
+const imgTargets = document.querySelectorAll('img[data-src]');
+const lazyImg = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+  entry.target.classList.remove('lazy-img')
+};
+const imgObserver = new IntersectionObserver(lazyImg, {
+  root: null,
+  threshold: 0.1,
+});
+imgTargets.forEach(img => imgObserver.observe(img));
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
