@@ -131,7 +131,7 @@ nav.addEventListener('mouseout', hoverHandle.bind(1));
 // });
 
 const header = document.querySelector('.header');
-
+const navHeight = nav.getBoundingClientRect().height;
 const stickyNav = function (entries, observer) {
   const [entry] = entries; // same as writiing entries[0]
   if (!entry.isIntersecting) {
@@ -139,13 +139,14 @@ const stickyNav = function (entries, observer) {
     nav.style.opacity = 0.8;
   } else {
     nav.classList.remove('sticky');
-    nav.style.opacity = [1];
+    nav.style.opacity = 1;
   }
 };
 
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
+  rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
 

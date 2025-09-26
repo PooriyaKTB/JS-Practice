@@ -190,6 +190,7 @@ const obsCallback = function (entries, observer) {
 const obsOptions = {
   root: null, // The element that the target element is intersecting. if we set it to null, it means the viewport
   threshold: [0, 0.2], // 0.1 means 10% of the target element is visible in the root element (viewport). precentage of intersection at which the observer callback will be called. (we can set it to array of values as well [0, 0.2, 0.5, 0.8, 1])
+  rootMargin: "-90px",
 };
 
 const observer = new IntersectionObserver(obsCallback, obsOptions);
