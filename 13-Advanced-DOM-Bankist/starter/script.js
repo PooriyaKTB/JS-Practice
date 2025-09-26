@@ -156,7 +156,7 @@ const revealSection = function (entries, observer) {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.remove('section--hidden');
-    observer.unobsorve(entry.target);
+    observer.unobserve(entry.target);
   });
 };
 
