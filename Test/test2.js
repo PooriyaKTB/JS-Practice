@@ -141,34 +141,56 @@ setTimeout(() => clearInterval(displayClock), 10000);
 // NOTE: It's recommeneded to only stop propagation when really have to.
 
 document.querySelector("_").addEventListener("click", function (e) {
-    // instead of "_" we write our element name
-    this.style.backgroundcolor = "red";
-    console.loge(e.target, e.currentTarget);
-    
-    e.stopPropagation();
+  // instead of "_" we write our element name
+  this.style.backgroundcolor = "red";
+  console.loge(e.target, e.currentTarget);
+
+  e.stopPropagation();
 });
 
 // ------------------------------------- Section 13 - 206 ----------------------------------------------
 // Tabbed Component
 
-tabsContainer.addEventListener('click', e => {
+tabsContainer.addEventListener("click", (e) => {
   const clickedBadWay = e.target;
   //console.log(clickedBadWay)  as it's obviouse, the button has span inside, so if user click on span nothing happen. to solve it:
-  const clicked = e.target.closest('.operations__tab');
+  const clicked = e.target.closest(".operations__tab");
   console.log(clicked);
 
   if (!clicked) return; // Guard clause
 
   // Remove active classes (for tabs and contents)
-  tabs.forEach(t => t.classList.remove('operations__tab--active'));
-  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
-  
+  tabs.forEach((t) => t.classList.remove("operations__tab--active"));
+  tabsContent.forEach((c) => c.classList.remove("operations__content--active"));
+
   // Active tab
-  clicked.classList.add('operations__tab--active');
+  clicked.classList.add("operations__tab--active");
 
   // Activate content area
   console.log(clicked.dataset.tab);
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
-    .classList.add('operations__content--active');
+    .classList.add("operations__content--active");
 });
+
+// ------------------------------------- Section 13 - 209 ----------------------------------------------
+// Intersection Observer
+
+const obsCallback = function (entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      nav.classList.add("sticky");
+      nav.style.opacity = 0.8;
+    } else {
+      nav.classList.remove("sticky");
+      nav.style.opacity = [1];
+    }
+  });
+};
+const obsOptions = {
+  root: null, // The element that the target element is intersecting. if we set it to null, it means the viewport
+  threshold: [0, 0.2], // 0.1 means 10% of the target element is visible in the root element (viewport). precentage of intersection at which the observer callback will be called. (we can set it to array of values as well [0, 0.2, 0.5, 0.8, 1])
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);

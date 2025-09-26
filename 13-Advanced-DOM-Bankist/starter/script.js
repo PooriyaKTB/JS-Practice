@@ -119,15 +119,35 @@ nav.addEventListener('mouseover', hoverHandle.bind(0.5));
 nav.addEventListener('mouseout', hoverHandle.bind(1));
 
 // Sticky nav
-window.addEventListener('scroll', () => {
-  if (window.scrollY > section1.getBoundingClientRect().top) {
+// const initialCoords = section1.getBoundingClientRect();
+// window.addEventListener('scroll', () => {
+//   if (window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//     nav.style.opacity = 0.8;
+//   } else {
+//     nav.classList.remove('sticky');
+//     nav.style.opacity = 1;
+//   }
+// });
+
+const header = document.querySelector('.header');
+
+const stickyNav = function (entries, observer) {
+  const [entry] = entries; // same as writiing entries[0]
+  if (!entry.isIntersecting) {
     nav.classList.add('sticky');
     nav.style.opacity = 0.8;
   } else {
     nav.classList.remove('sticky');
-    nav.style.opacity = 1;
+    nav.style.opacity = [1];
   }
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
 });
+headerObserver.observe(header);
 
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -285,4 +305,24 @@ console.log(h1.parentElement.children);
 })
  */
 
-// ------------------------------------- Section 13 - 206 ----------------------------------------------
+// ------------------------------------- Section 13 - 209 ----------------------------------------------
+/* 
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      nav.classList.add('sticky');
+      nav.style.opacity = 0.8;
+    } else {
+      nav.classList.remove('sticky');
+      nav.style.opacity = [1];
+    }
+  });
+};
+const obsOptions = {
+  root: null, // The element that the target element is intersecting. if we set it to null, it means the viewport
+  threshold: [0, 0.2], // 0.1 means 10% of the target element is visible in the root element (viewport). precentage of intersection at which the observer callback will be called. (we can set it to array of values as well [0, 0.2, 0.5, 0.8, 1])
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+ */
