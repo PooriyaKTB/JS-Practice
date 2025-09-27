@@ -177,17 +177,68 @@ const lazyImg = function (entries, observer) {
   // Replace src with data-src
   entry.target.src = entry.target.dataset.src;
   // entry.target.classList.remove('lazy-img') // NOT really good choice, specially for slow networks. instead:
-  entry.target.addEventListener('load', ()=>{
-    entry.target.classList.remove('lazy-img')
-  })
-  observer.unobserve(entry.target)
+  entry.target.addEventListener('load', () => {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
 };
 const imgObserver = new IntersectionObserver(lazyImg, {
   root: null,
   threshold: 0,
-  rootMargin: '200px'  // to make sure images load fast and early, so that the user never understand tha we used lazy loading
+  rootMargin: '200px', // to make sure images load fast and early, so that the user never understand tha we used lazy loading
 });
 imgTargets.forEach(img => imgObserver.observe(img));
+
+// Slider
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let curSlide = 0;
+const maxSlide = slides.length;
+
+
+// To see how it works behind the sence
+const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4)';
+slider.style.overflow = 'visible';
+
+
+slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+
+goToSlide(0);
+
+// Next Slide
+const nextSlide = function () {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+
+  goToSlide(curSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+
+// Prev Slide
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1;
+  } else {
+    curSlide--;
+  }
+  goToSlide(curSlide);
+};
+
+btnLeft.addEventListener('click', prevSlide);
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
