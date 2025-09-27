@@ -199,7 +199,7 @@ const maxSlide = slides.length;
 
 
 // To see how it works behind the sence
-const slider = document.querySelector('.slider');
+// const slider = document.querySelector('.slider');
 // slider.style.transform = 'scale(0.4)';
 // slider.style.overflow = 'visible';
 

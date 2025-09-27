@@ -196,7 +196,7 @@ const obsOptions = {
 const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(section1);
 
-// ------------------------------------- Section 13 - 209 ----------------------------------------------
+// ------------------------------------- Section 13 - 213 ----------------------------------------------
 
 // Slider
 const slides = document.querySelectorAll('.slide');
@@ -206,18 +206,18 @@ const btnRight = document.querySelector('.slider__btn--right');
 let curSlide = 0;
 const maxSlide = slides.length;
 
-/* 
-// To see how it works behind the sence
-const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.4)';
-slider.style.overflow = 'visible';
- */
 
-// slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i})`));
+// To see how it works behind the sence
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4)';
+// slider.style.overflow = 'visible';
+
+
+slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
 
 const goToSlide = function (slide) {
   slides.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)})`)
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
   );
 };
 
