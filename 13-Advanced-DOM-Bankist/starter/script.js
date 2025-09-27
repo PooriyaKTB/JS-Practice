@@ -201,7 +201,7 @@ const maxSlide = slides.length;
 // To see how it works behind the sence
 const slider = document.querySelector('.slider');
 // slider.style.transform = 'scale(0.4)';
-slider.style.overflow = 'visible';
+// slider.style.overflow = 'visible';
 
 
 slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
