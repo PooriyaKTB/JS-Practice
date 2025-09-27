@@ -200,26 +200,31 @@ observer.observe(section1);
 
 // Slider
 const slides = document.querySelectorAll('.slide');
-const btnLeft = doc.querySelector('.slider__btn--left');
-const btnRight = doc.querySelector('.slider__btn--right');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let curSlide = 0;
+const maxSlide = slides.length;
+
 /* 
 // To see how it works behind the sence
 const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.4)'
-slider.style.overflow = 'visible'
+slider.style.transform = 'scale(0.4)';
+slider.style.overflow = 'visible';
  */
-let curSlide = 0;
-const maxSlide = slides.length;
-slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
+
+// slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i})`));
 
 const goToSlide = function (slide) {
   slides.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)})`)
   );
 };
 
-// Next slide
-btnRight.addEventListener('click', () => {
+goToSlide(0);
+
+// Next Slide
+const nextSlide = function () {
   if (curSlide === maxSlide - 1) {
     curSlide = 0;
   } else {
@@ -227,4 +232,18 @@ btnRight.addEventListener('click', () => {
   }
 
   goToSlide(curSlide);
-});
+};
+
+btnRight.addEventListener('click', nextSlide);
+
+// Prev Slide
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1;
+  } else {
+    curSlide--;
+  }
+  goToSlide(curSlide);
+};
+
+btnLeft.addEventListener('click', prevSlide);
