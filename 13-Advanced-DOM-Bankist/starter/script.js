@@ -459,3 +459,17 @@ const obsOptions = {
 const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(section1);
  */
+
+document.addEventListener('DOMContentLoaded', (e)=>{
+  console.log(e);
+})
+
+window.addEventListener('load',(e)=>{
+  console.log(e)
+})
+
+window.addEventListener('beforeeunload',(e)=>{
+  e.preventDefault()
+  console.log(e);
+  e.returnValue = ''
+})
