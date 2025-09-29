@@ -197,12 +197,10 @@ const btnRight = document.querySelector('.slider__btn--right');
 let curSlide = 0;
 const maxSlide = slides.length;
 
-
 // To see how it works behind the sence
 // const slider = document.querySelector('.slider');
 // slider.style.transform = 'scale(0.4)';
 // slider.style.overflow = 'visible';
-
 
 slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
 
@@ -239,6 +237,32 @@ const prevSlide = function () {
 
 btnLeft.addEventListener('click', prevSlide);
 
+document.addEventListener('keydown', e => {
+  // if (e.key === 'ArrowRight') nextSlide();
+  // if (e.key === 'ArrowLeft') prevSlide();
+  // Same functionalit via using short circuting
+  e.key === 'ArrowRight' && nextSlide();
+  e.key === 'ArrowLeft' && prevSlide();
+});
+
+const dotsContainer = document.querySelector('.dots');
+
+const createDots = function () {
+  slides.forEach(function (_, i) {
+    dotsContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class = "dots__dot" data-slide = "${i}"></button>`
+    );
+  });
+};
+createDots();
+
+dotsContainer.addEventListener('click', (e)=> {
+  if(e.target.classList.contains('dots__dot')){
+    curSlide = Number(e.target.dataset.slide) 
+    goToSlide(curSlide)
+  }
+})
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
