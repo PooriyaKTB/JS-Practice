@@ -221,6 +221,7 @@ const nextSlide = function () {
   }
 
   goToSlide(curSlide);
+  activeDot(curSlide);
 };
 
 btnRight.addEventListener('click', nextSlide);
@@ -233,6 +234,7 @@ const prevSlide = function () {
     curSlide--;
   }
   goToSlide(curSlide);
+  activeDot(curSlide);
 };
 
 btnLeft.addEventListener('click', prevSlide);
@@ -257,12 +259,24 @@ const createDots = function () {
 };
 createDots();
 
-dotsContainer.addEventListener('click', (e)=> {
-  if(e.target.classList.contains('dots__dot')){
-    curSlide = Number(e.target.dataset.slide) 
-    goToSlide(curSlide)
+const activeDot = function (slide) {
+  document
+    .querySelectorAll('.dots__dot')
+    .forEach(d => d.classList.remove('dots__dot--active'));
+
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add('dots__dot--active');
+};
+activeDot(0)
+dotsContainer.addEventListener('click', e => {
+  if (e.target.classList.contains('dots__dot')) {
+    curSlide = Number(e.target.dataset.slide);
+    goToSlide(curSlide);
+    activeDot(curSlide);
   }
-})
+});
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
