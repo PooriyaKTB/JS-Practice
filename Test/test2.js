@@ -256,4 +256,10 @@ btnLeft.addEventListener('click', prevSlide);
 2- ES6 Classes: more modern way of doing OOP in JS
 3- Object.create() : the most easy way to link an object to a prototype
 **keep in mind that OOP in JS is completely diffrent from classical OOP.
- */
+
+OOP principles:
+abstractiion
+Encapsulation
+Inheritance
+Polymorphism
+*/
