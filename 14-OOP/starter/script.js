@@ -30,7 +30,15 @@ const me = new Person('pooriya', 33)
     console.log(me instanceof Person);
     console.log(me2 instanceof Person);
     
-    
+
 // me.birthYear()
    
  me.birthYear()
+
+console.log(me.__proto__); // __proto__ property comes from step 3 on calling constructor function via new keyword. and it sets its value to the prototype property of the function that is being callled.
+console.log(me.__proto__ === Person.prototype); // NOTE: Person.prototype is not actually thr prototype of person. Butt instead it is what's gonna be used as the protoype of all the objects that are created with the Person constructor function.  
+console.log(Person.prototype.isPrototypeOf(me)); // NOTE: to make it easier to understand, think of the prototype property as prototype of linked object property. (eg: .prototypeOfLinkedObject)
+Person.prototype.gen = 'adult'
+
+console.log(me.hasOwnProperty('firstName'));
+console.log(me.hasOwnProperty('gen'));
