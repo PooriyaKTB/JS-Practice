@@ -77,3 +77,39 @@ Bmw.accelerate();
 Bmw.brake();
 Bmw.brake();
 Bmw.brake();
+
+// ------------------------------------- Section 14 - 226 ----------------------------------------------
+
+// NOTE: although we use class keyword, it's just a syntatic sugar, So that behind the scenes classes are still function. therefore we have class expresion and declaration.
+// Class expression
+const PersonClEx = class {};
+
+// Class declaration
+class PersonClDc {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2025 - this.birthYear);
+  }
+}
+const pooriya = new PersonClDc('Pooriya', 1992);
+console.log(pooriya);
+pooriya.calcAge();
+
+console.log(pooriya.__proto__ === PersonClDc.prototype);
+
+// Adding method manually
+PersonClDc.prototype.greet = function () {
+  console.log(`hey ${this.firstName}`);
+};
+pooriya.greet();
+
+/* 
+// NOTES:
+1. Classes are not hoisted
+2. Classes are first-class citizens. we can pass them into a function or return them from functions
+3. Classes are always executed in strict mdoe
+*/
