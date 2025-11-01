@@ -59,12 +59,12 @@ const Car = function (make, speed) {
 };
 
 Car.prototype.accelerate = function () {
-  this.speed = this.speed + 10;
+  this.speed += 10;
   console.log(this.speed);
 };
 
 Car.prototype.brake = function () {
-  this.speed = this.speed - 5;
+  this.speed -= 5;
   console.log(this.speed);
 };
 
@@ -73,7 +73,7 @@ const Benz = new Car('Benz', 95);
 
 console.log(Bmw);
 console.log(Benz);
-console.log(Bmw.accelerate());
-console.log(Bmw.brake());
-console.log(Bmw.brake());
-console.log(Bmw.brake());
+Bmw.accelerate();
+Bmw.brake();
+Bmw.brake();
+Bmw.brake();
