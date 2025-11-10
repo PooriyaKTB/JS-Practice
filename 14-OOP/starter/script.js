@@ -94,10 +94,14 @@ class PersonClDc {
   calcAge() {
     console.log(2025 - this.birthYear);
   }
+  get age() {
+    return 2025 - this.birthYear;
+  }
 }
 const pooriya = new PersonClDc('Pooriya', 1992);
 console.log(pooriya);
 pooriya.calcAge();
+console.log(pooriya.age);
 
 console.log(pooriya.__proto__ === PersonClDc.prototype);
 
@@ -130,3 +134,36 @@ const account = {
 console.log(account.latest);
 account.latest = 100;
 console.log(account.movements);
+
+class User {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(2025 - this.birthYear);
+  }
+  greet() {
+    console.log(`Hi ${this.fullName}`);
+  }
+  get age() {
+    return 2025 - this.birthYear;
+  }
+  set fullName(name) {
+    // Set a property that already exists
+    if (name.includes(' ')) this._fullName = name;
+    // Here the _ is just a convention. whitout _ maximum callstack size exceeded error because of a conflict, both setter function and constructor function trying to set exact same property name.
+    else alert('Invalid input');
+  }
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+const pooriyaa = new User('pooria ketabi', 1992);
+console.log(pooriyaa);
+pooriyaa.fullName = 'pooriya ketabi';
+console.log(pooriyaa);
+console.log(pooriyaa.fullNameå);
+console.log(pooriyaa._fullName);
+console.log(pooriyaa.fullName);
