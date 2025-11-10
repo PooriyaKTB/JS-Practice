@@ -140,6 +140,8 @@ class User {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
+  // Instance methods
+  // Method will be added to .prototype property
   calcAge() {
     console.log(2025 - this.birthYear);
   }
@@ -158,6 +160,12 @@ class User {
   get fullName() {
     return this._fullName;
   }
+
+  // Static method
+  static hey() {
+    console.log('Hey there');
+    console.log(this);
+  }
 }
 
 const pooriyaa = new User('pooria ketabi', 1992);
@@ -167,3 +175,13 @@ console.log(pooriyaa);
 console.log(pooriyaa.fullNameå);
 console.log(pooriyaa._fullName);
 console.log(pooriyaa.fullName);
+
+User.hey();
+
+// ------------------------------------- Section 14 - 228 ----------------------------------------------
+
+PersonClDc.hey = function () {
+  console.log('Hey there');
+  console.log(this);
+};
+PersonClDc.hey();
