@@ -113,3 +113,20 @@ pooriya.greet();
 2. Classes are first-class citizens. we can pass them into a function or return them from functions
 3. Classes are always executed in strict mdoe
 */
+
+// ------------------------------------- Section 14 - 227 ----------------------------------------------
+
+const account = {
+  owner: 'Pooriya',
+  movements: [2000, 600, 800, 5000],
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+account.latest = 100;
+console.log(account.movements);
