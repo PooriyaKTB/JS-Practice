@@ -191,6 +191,11 @@ const PersonProto = {
   calcAge() {
     console.log(2025 - this.birthYear);
   },
+  init(firstName, birthYear) {
+    // It looks like constructor but it's not (beacuase we are not using "new" operator to call this)
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
 };
 
 const Pooriya2 = Object.create(PersonProto);
@@ -202,3 +207,7 @@ console.log(Pooriya2);
 Pooriya2.calcAge();
 console.log(Pooriya2.__proto__);
 console.log(Pooriya2.__proto__ === PersonProto);
+
+const pooriya3 = Object.create(PersonProto);
+pooriya3.init('Pooriya2', 1992);
+console.log(pooriya3);
