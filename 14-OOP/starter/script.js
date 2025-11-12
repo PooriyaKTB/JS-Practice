@@ -7,8 +7,7 @@ const Person = function (firstName, age) {
   /* 
     this.birthYear = function(){    // This is very bad practice, we should never create a method inside constructor function. because of performance while we creat lots of instances. instead we use prototype and prototype inheritance
         console.log(2025 - this.age)
-    } 
-*/
+    }*/
 };
 
 Person.prototype.birthYear = function () {
@@ -172,7 +171,7 @@ const pooriyaa = new User('pooria ketabi', 1992);
 console.log(pooriyaa);
 pooriyaa.fullName = 'pooriya ketabi';
 console.log(pooriyaa);
-console.log(pooriyaa.fullNameå);
+console.log(pooriyaa.fullName);
 console.log(pooriyaa._fullName);
 console.log(pooriyaa.fullName);
 
@@ -185,3 +184,21 @@ PersonClDc.hey = function () {
   console.log(this);
 };
 PersonClDc.hey();
+
+// ------------------------------------- Section 14 - 229 ----------------------------------------------
+
+const PersonProto = {
+  calcAge() {
+    console.log(2025 - this.birthYear);
+  },
+};
+
+const Pooriya2 = Object.create(PersonProto);
+console.log(Pooriya2);
+Pooriya2.name = 'Pooirya';
+Pooriya2.birthYear = 1992;
+console.log(Pooriya2);
+
+Pooriya2.calcAge();
+console.log(Pooriya2.__proto__);
+console.log(Pooriya2.__proto__ === PersonProto);
