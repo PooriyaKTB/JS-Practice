@@ -211,3 +211,44 @@ console.log(Pooriya2.__proto__ === PersonProto);
 const pooriya3 = Object.create(PersonProto);
 pooriya3.init('Pooriya2', 1992);
 console.log(pooriya3);
+
+// ------------------------------------- Section 14 - 230 ----------------------------------------------
+class Car2 {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+  }
+
+  brake() {
+    this.speed -= 5;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speedUS) {
+    this.speed = speedUS * 1.6;
+  }
+}
+
+const Ford = new Car2('Ford', 120);
+console.log(Ford);
+console.log(Ford.speedUS);
+console.log('------');
+
+Ford.accelerate();
+// Ford.accelerate();
+console.log(Ford);
+Ford.brake();
+console.log(Ford);
+Ford.brake();
+console.log(Ford);
+
+Ford.speedUS = 60;
+console.log(Ford.speedUS);
+console.log(Ford);
