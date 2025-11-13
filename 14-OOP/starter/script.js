@@ -284,3 +284,14 @@ const pooriaa = new Student('Pooriya', 1992, 'JS');
 console.log(pooriaa);
 pooriaa.introduce();
 pooriaa.calcAge();
+
+console.log(pooriaa.__proto__);
+console.log(pooriaa.__proto__.__proto__);
+
+console.log(pooriaa instanceof Student);
+console.log(pooriaa instanceof PersonEx); // is true because of Linking prototypes
+console.log(pooriaa instanceof Object);
+
+console.log(Student.prototype.constructor);
+console.dir(Student.prototype.constructor); // must be Student, NOT PersonEx. so:
+Student.prototype.constructor = Student;
