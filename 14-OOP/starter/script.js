@@ -252,3 +252,35 @@ console.log(Ford);
 Ford.speedUS = 60;
 console.log(Ford.speedUS);
 console.log(Ford);
+
+// ------------------------------------- Section 14 - 231 ----------------------------------------------
+console.log('---231---');
+
+const PersonEx = function (firstName, birthYear) {
+  this.firstname = firstName;
+  this.birthYear = birthYear;
+};
+
+PersonEx.prototype.calcAge = function () {
+  console.log(2025 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  /*this.firstName = firstName; 
+  this.birthYear = birthYear;  // It is very bad practice, what if Person implementation change in future? does the Student follow it? NO, so we do call Person inside Student as below:
+  Person(firstName, birthYear);*/ // Not work, as its regular function call and in regular function calling "this" keyword is set to undefined. So we use "call" method on it to set this keyword manually, as below:
+  PersonEx.call(this, firstName, birthYear);
+
+  this.course = course;
+};
+
+Student.prototype = Object.create(PersonEx.prototype); // Linking prototypes
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and study ${this.course} course`);
+};
+
+const pooriaa = new Student('Pooriya', 1992, 'JS');
+console.log(pooriaa);
+pooriaa.introduce();
+pooriaa.calcAge();
