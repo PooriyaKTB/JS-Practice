@@ -429,10 +429,16 @@ class Account {
     // Fake method implementation
     return true;
   }
+
   requestLoan(val) {
     if (this.#approvedLoan(val)) {
       this.deposit(val);
     }
+  }
+
+  static test() {
+    // REMEMBER: static methods are not accessible on instances
+    console.log('test');
   }
 }
 const acc1 = new Account('Pooriya', 'GBP', 5543);
@@ -441,3 +447,5 @@ acc1.deposit(1000);
 acc1.deposit(500);
 acc1.movements = [];
 // console.log(acc1.#movements); / Throw error because it's a Private field
+
+Account.test();
