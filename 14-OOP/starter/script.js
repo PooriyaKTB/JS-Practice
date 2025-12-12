@@ -398,18 +398,21 @@ class Account {
   local = navigator.language;
   bankName = 'Bankist';
 
+  #movements = [];
+  #pin;
+
   constructor(owner, curreny, pin) {
     this.owner = owner;
     this.curreny = curreny;
-    this.pin = pin;
-    this.movements = [];
-    // this.locale = navigator.language; // we added it as a field, just like bankName
+    this.#pin = pin; // we canot do what we did on movements, because it depends on input data, So we defined the variable outside of constructor and assign it here
+    // this.movements = []; // we added it as a Private field
+    // this.locale = navigator.language; // we added it as a Public field, just like bankName
 
     console.log(`Thanks for opening account with us, ${owner}`);
   }
 
   deposit(val) {
-    this.movements.push(val);
+    this.#movements.push(val);
   }
 
   withdraw(val) {
@@ -427,3 +430,7 @@ class Account {
 }
 const acc1 = new Account('Pooriya', 'GBP', 5543);
 console.log(acc1);
+acc1.deposit(1000);
+acc1.deposit(500);
+acc1.movements = [];
+// console.log(acc1.#movements); / Throw error because it's a Private field
