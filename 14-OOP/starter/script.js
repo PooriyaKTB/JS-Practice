@@ -267,8 +267,8 @@ PersonEx.prototype.calcAge = function () {
 
 const Student = function (firstName, birthYear, course) {
   /*this.firstName = firstName; 
-  this.birthYear = birthYear;  // It is very bad practice, what if Person implementation change in future? does the Student follow it? NO, so we do call Person inside Student as below:
-  Person(firstName, birthYear);*/ // Not work, as its regular function call and in regular function calling "this" keyword is set to undefined. So we use "call" method on it to set this keyword manually, as below:
+    this.birthYear = birthYear;  // It is very bad practice, what if Person implementation change in future? does the Student follow it? NO, so we do call Person inside Student as below:
+    Person(firstName, birthYear);*/ // Not work, as its regular function call and in regular function calling "this" keyword is set to undefined. So we use "call" method on it to set this keyword manually, as below:
   PersonEx.call(this, firstName, birthYear);
 
   this.course = course;
@@ -295,3 +295,47 @@ console.log(pooriaa instanceof Object);
 console.log(Student.prototype.constructor);
 console.dir(Student.prototype.constructor); // must be Student, NOT PersonEx. so:
 Student.prototype.constructor = Student;
+
+// ------------------------------------- Section 14 - 232 ----------------------------------------------
+
+const Car3 = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car3.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(this.speed);
+};
+
+Car3.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(this.speed);
+};
+
+const EV = function (make, speed, charge) {
+  Car3.call(this, make, speed);
+  this.charge = charge;
+};
+
+// link the prototypes
+EV.prototype = Object.create(Car3.prototype);
+
+// Adding methods to Prototype of EV
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
+
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+};
+
+const tesla = new EV('tesla', 120, 40);
+console.log(tesla);
+tesla.chargeBattery(90);
+console.log(tesla);
+tesla.brake();
+console.log(tesla);
+tesla.accelerate();
+console.log(tesla);
