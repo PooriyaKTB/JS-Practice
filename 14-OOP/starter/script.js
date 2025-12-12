@@ -339,3 +339,54 @@ tesla.brake();
 console.log(tesla);
 tesla.accelerate();
 console.log(tesla);
+
+// ------------------------------------- Section 14 - 233 ----------------------------------------------
+
+class User2 {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  // Instance methods
+  // Method will be added to .prototype property
+  calcAge() {
+    console.log(2025 - this.birthYear);
+  }
+  greet() {
+    console.log(`Hi ${this.fullName}`);
+  }
+  get age() {
+    return 2025 - this.birthYear;
+  }
+  set fullName(name) {
+    // Set a property that already exists
+    if (name.includes(' ')) this._fullName = name;
+    // Here the _ is just a convention. whitout _ maximum callstack size exceeded error because of a conflict, both setter function and constructor function trying to set exact same property name.
+    else alert('Invalid input');
+  }
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey User2');
+    console.log(this);
+  }
+}
+
+class Students extends User2 {
+  constructor(fullName, birthYear, course) {
+    // Always need to happen first!  because this call to the super function is responsible for creating the this keyword in this subclass.
+    super(fullName, birthYear); // Super is basically the constructor function of the parent class.
+    this.course = course; // if we don't need it, then we don't need to have constructor function at all. because the super function would automatically be called with all the argumaents that are passed into this constructor.
+  }
+  introduce() {
+    console.log(`My name is ${this.fullName} and study ${this.course} course`);
+  }
+}
+
+const martha = new Students('Martha Jones', 2012, 'IT');
+console.log(martha);
+martha.introduce();
+martha.calcAge();
