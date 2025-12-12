@@ -411,6 +411,11 @@ class Account {
     console.log(`Thanks for opening account with us, ${owner}`);
   }
 
+  // Public interface (API)
+  getMovements() {
+    return this.#movements;
+  }
+
   deposit(val) {
     this.#movements.push(val);
   }
@@ -419,11 +424,13 @@ class Account {
     this.deposit(-val);
   }
 
-  approvedLoan(val) {
+  #approvedLoan(val) {
+    // Now it's Private method
+    // Fake method implementation
     return true;
   }
   requestLoan(val) {
-    if (this.approvedLoan(val)) {
+    if (this.#approvedLoan(val)) {
       this.deposit(val);
     }
   }
