@@ -394,12 +394,16 @@ martha.calcAge();
 // ------------------------------------- Section 14 - 235 ----------------------------------------------
 
 class Account {
+  //fields:
+  local = navigator.language;
+  bankName = 'Bankist';
+
   constructor(owner, curreny, pin) {
     this.owner = owner;
     this.curreny = curreny;
     this.pin = pin;
     this.movements = [];
-    this.locale = navigator.language;
+    // this.locale = navigator.language; // we added it as a field, just like bankName
 
     console.log(`Thanks for opening account with us, ${owner}`);
   }
@@ -421,3 +425,5 @@ class Account {
     }
   }
 }
+const acc1 = new Account('Pooriya', 'GBP', 5543);
+console.log(acc1);
