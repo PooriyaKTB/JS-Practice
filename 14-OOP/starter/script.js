@@ -390,3 +390,34 @@ const martha = new Students('Martha Jones', 2012, 'IT');
 console.log(martha);
 martha.introduce();
 martha.calcAge();
+
+// ------------------------------------- Section 14 - 235 ----------------------------------------------
+
+class Account {
+  constructor(owner, curreny, pin) {
+    this.owner = owner;
+    this.curreny = curreny;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening account with us, ${owner}`);
+  }
+
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  approvedLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this.approvedLoan(val)) {
+      this.deposit(val);
+    }
+  }
+}
