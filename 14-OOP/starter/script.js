@@ -413,7 +413,7 @@ class Account {
 
   // Public interface (API)
   getMovements() {
-    return this.#movements;
+    return this.#movements; // Not chainable method
   }
 
   deposit(val) {
@@ -423,20 +423,20 @@ class Account {
 
   withdraw(val) {
     this.deposit(-val);
-    return this;
+    return this; // For method chaining
   }
 
   #approvedLoan(val) {
     // Now it's Private method
     // Fake method implementation
-    return true;
+    return true; // For method chaining
   }
 
   requestLoan(val) {
     if (this.#approvedLoan(val)) {
       this.deposit(val);
     }
-    return this;
+    return this; // For method chaining
   }
 
   static test() {
@@ -455,4 +455,12 @@ Account.test();
 
 // Method chaining:
 acc1.deposit(1000).withdraw(500).withdraw(200).deposit(2100).withdraw(500);
+const movs = acc1
+  .deposit(1000)
+  .withdraw(500)
+  .withdraw(200)
+  .deposit(2100)
+  .withdraw(500)
+  .getMovements();
 console.log(acc1);
+console.log(movs);
