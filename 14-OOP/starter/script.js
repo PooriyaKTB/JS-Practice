@@ -418,10 +418,12 @@ class Account {
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   #approvedLoan(val) {
@@ -434,6 +436,7 @@ class Account {
     if (this.#approvedLoan(val)) {
       this.deposit(val);
     }
+    return this;
   }
 
   static test() {
@@ -449,3 +452,7 @@ acc1.movements = [];
 // console.log(acc1.#movements); / Throw error because it's a Private field
 
 Account.test();
+
+// Method chaining:
+acc1.deposit(1000).withdraw(500).withdraw(200).deposit(2100).withdraw(500);
+console.log(acc1);
