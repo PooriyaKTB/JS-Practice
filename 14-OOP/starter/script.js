@@ -464,3 +464,35 @@ const movs = acc1
   .getMovements();
 console.log(acc1);
 console.log(movs);
+// ------------------------------------- Section 14 - 239 ----------------------------------------------
+class EVCl extends Car3 {
+  #charge;
+
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h with charge of ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+  brake() {
+    this.speed -= 5;
+    console.log(this.speed);
+    return this;
+  }
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    console.log(`${this.make} charge is now ${this.#charge}`);
+    return this;
+  }
+}
+
+const tesla2 = new EVCl('tesla', 100, 65);
