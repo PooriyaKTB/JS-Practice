@@ -30,12 +30,18 @@ if (navigator.geolocation) {
       map.on('click', function (mapEvent) {
         console.log(mapEvent);
         const { lat, lng } = mapEvent.latlng;
-        L.marker([lat,lng])
-        .addTo(map)
-        .bindPopup('Workout')
-        .openPopup();
-    });
-
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+            })
+          )
+          .setPopupContent('Workout')
+          .openPopup();
+      });
     },
     function () {
       alert('Can locate you');
