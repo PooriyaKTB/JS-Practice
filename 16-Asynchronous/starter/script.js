@@ -10,7 +10,7 @@ const countriesContainer = document.querySelector('.countries');
 // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
 
 ///////////////////////////////////////
-function renderCountry(data, className='') {
+function renderCountry(data, className = '') {
   const html = `
         <article class="country ${className}">
             <img class="country__img" src="${data.flag}" />
@@ -54,9 +54,26 @@ const getCountryData = function (country) {
       const data2 = JSON.parse(this.responseText);
       console.log(data2);
 
-      renderCountry(data2,"neighbour");
+      renderCountry(data2, 'neighbour');
     });
   });
 };
 
-getCountryData('usa');
+// ////////////////////////// Same thing in better way //////////////////////////
+
+function getCountryData2(country) {
+  fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`)
+    .then(res => res.json())
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+      return fetch(
+        `https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`,
+      );
+    })
+    .then(res => res.json())
+    .then(data => {
+      renderCountry(data, 'neighbour');
+    })
+}
+getCountryData2('germany');
