@@ -74,6 +74,13 @@ function getCountryData2(country) {
     .then(res => res.json())
     .then(data => {
       renderCountry(data, 'neighbour');
+
+      const neighbour2 = data.borders?.[0];
+      return fetch(
+        `https://countries-api-836d.onrender.com/countries/alpha/${neighbour2}`,
+      );
     })
+    .then(res => res.json())
+    .then(data => renderCountry(data, 'neighbour'));
 }
 getCountryData2('germany');
