@@ -24,7 +24,12 @@ function renderCountry(data, className = '') {
         </article>
         `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+//   countriesContainer.style.opacity = 1; // moved it into "finally"
+}
+
+function renderError(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+//   countriesContainer.style.opacity = 1;  // moved it into "finally"
 }
 
 const getCountryData = function (country) {
@@ -81,6 +86,10 @@ function getCountryData2(country) {
       );
     })
     .then(res => res.json())
-    .then(data => renderCountry(data, 'neighbour'));
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => renderError(`Something went wrong: ${err.message}`))
+    .finally(() => countriesContainer.style.opacity = 1); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected; "finally" usually used to hide a loading spinner
 }
-getCountryData2('germany');
+btn.addEventListener('click', function () {
+  getCountryData2('germany');
+});
