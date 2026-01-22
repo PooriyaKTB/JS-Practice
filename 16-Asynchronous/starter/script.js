@@ -24,12 +24,12 @@ function renderCountry(data, className = '') {
         </article>
         `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-//   countriesContainer.style.opacity = 1; // moved it into "finally"
+  //   countriesContainer.style.opacity = 1; // moved it into "finally"
 }
 
 function renderError(msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
-//   countriesContainer.style.opacity = 1;  // moved it into "finally"
+  //   countriesContainer.style.opacity = 1;  // moved it into "finally"
 }
 
 const getCountryData = function (country) {
@@ -68,7 +68,10 @@ const getCountryData = function (country) {
 
 function getCountryData2(country) {
   fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error(`country not found (${res.status})`);
+      return res.json();
+    })
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders?.[0];
@@ -88,7 +91,7 @@ function getCountryData2(country) {
     .then(res => res.json())
     .then(data => renderCountry(data, 'neighbour'))
     .catch(err => renderError(`Something went wrong: ${err.message}`))
-    .finally(() => countriesContainer.style.opacity = 1); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected; "finally" usually used to hide a loading spinner
+    .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected; "finally" usually used to hide a loading spinner
 }
 btn.addEventListener('click', function () {
   getCountryData2('germany');
