@@ -68,14 +68,16 @@ const getCountryData = function (country) {
 
 function getCountryData2(country) {
   fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`) // fetch returns a promise, so to consume the promises we use .then(CallBack(res ="resulting value of the fulfilled promise as argument")) callBack will be called as soon as the promise is fulfilled
-    .then(res => { // .then() can get second callBack to handeling(catching) errors if occures. like: .then(res=>  res.json(), err => alert(err)). the Point is if we have chained promises, it only catch direct then() promise, so we need to catch err in all then(). So we can catch all errors globally in promise chain (no matter where they appear in the chain) via adding .catch(CallBack) add end of promises chain a
-      if (!res.ok) throw new Error(`country not found (${res.status})`); // any Error that happends in callback function (any .then handler) will immediately terminate that then handler and will propagate down to chtch method.
+    .then(res => {
+      // .then() can get second callBack to handeling(catching) errors if occures. like: .then(res=>  res.json(), err => alert(err)). the Point is if we have chained promises, it only catch direct then() promise, so we need to catch err in all then(). So we can catch all errors globally in promise chain (no matter where they appear in the chain) via adding .catch(CallBack) add end of promises chain a
+      if (!res.ok) throw new Error(`country not found (${res.status})`); // any Error that happends in callback function (any .then handler). throw keyword will immediately terminate current function(like how return does) and promise will immediately reject and will propagate down to catch handler method.
       return res.json(); // in order to be able to read from the response body, we always need to call .jason() method on the response. NOTE: .json() itself is also an aysnchtonus function which means it returns a new promise, so we need to return it and call another .then() afterward.
     })
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders?.[0];
-      return fetch(  // If we return a value from .then(), that value will become the fulfillment value of the return promise
+      return fetch(
+        // If we return a value from .then(), that value will become the fulfillment value of the return promise
         `https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`,
       );
     })
@@ -93,6 +95,37 @@ function getCountryData2(country) {
     .catch(err => renderError(`Something went wrong: ${err.message}`)) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
     .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected); "finally" usually used for something that always needs to happen like hide a loading spinner (Or fade the container like here). NOTE: .finally() only works on promises
 }
+// btn.addEventListener('click', function () {
+//   getCountryData2('germany');
+// });
+
+// ////////////////////////// Same thing in better way //////////////////////////
+function getJSON(url, errorMsg = 'Something went wrong') { // helper function
+  return fetch(url).then(res => {
+    if (!res.ok) throw new Error(`${errorMsg} (${res.status})`);
+    return res.json();
+  });
+}
+
+function getCountryData3(country) {
+  getJSON(
+    `https://countries-api-836d.onrender.com/countries/name/${country}`,
+    'country not found',
+  )
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+        if (!neighbour) throw new Error(`No neighbour found`)
+
+      return getJSON(
+        `https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`,
+        'country not found',
+      );
+    })
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => renderError(`Something went wrong: ${err.message}. Try again!`)) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
+    .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected); "finally" usually used for something that always needs to happen like hide a loading spinner (Or fade the container like here). NOTE: .finally() only works on promises
+}
 btn.addEventListener('click', function () {
-  getCountryData2('germany');
+  getCountryData3('australia');
 });
