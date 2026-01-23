@@ -100,7 +100,8 @@ function getCountryData2(country) {
 // });
 
 // ////////////////////////// Same thing in better way //////////////////////////
-function getJSON(url, errorMsg = 'Something went wrong') { // helper function
+function getJSON(url, errorMsg = 'Something went wrong') {
+  // helper function
   return fetch(url).then(res => {
     if (!res.ok) throw new Error(`${errorMsg} (${res.status})`);
     return res.json();
@@ -115,7 +116,7 @@ function getCountryData3(country) {
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders?.[0];
-        if (!neighbour) throw new Error(`No neighbour found`)
+      if (!neighbour) throw new Error(`No neighbour found`);
 
       return getJSON(
         `https://countries-api-836d.onrender.com/countries/alpha/${neighbour}`,
@@ -123,9 +124,41 @@ function getCountryData3(country) {
       );
     })
     .then(data => renderCountry(data, 'neighbour'))
-    .catch(err => renderError(`Something went wrong: ${err.message}. Try again!`)) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
+    .catch(err =>
+      renderError(`Something went wrong: ${err.message}. Try again!`),
+    ) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
     .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected); "finally" usually used for something that always needs to happen like hide a loading spinner (Or fade the container like here). NOTE: .finally() only works on promises
 }
 btn.addEventListener('click', function () {
   getCountryData3('australia');
 });
+
+////////////// Exercise #1 ////////////
+
+function whereAmI(lat, lng) {
+  fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+  )
+    .then(res => {
+      if (!res) throw new Error("Can't get data");
+      console.log(res);
+      return res.json();
+    })
+    // .then(data => console.log(data))
+    .then(data => {
+      console.log(`You are in ${data.city}, ${data.countryName}`);
+      return fetch(
+        `https://countries-api-836d.onrender.com/countries/name/${data.countryName}`,
+      );
+    })
+    .then(res => {
+      if (!res) throw new Error('Country not found');
+      return res.json();
+    })
+    .then(data => renderCountry(data[0]))
+    .catch(err => console.log(`sth went wrong ${err.message} ${err.status}`));
+}
+
+// whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
