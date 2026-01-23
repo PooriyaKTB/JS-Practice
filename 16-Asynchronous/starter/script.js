@@ -129,9 +129,9 @@ function getCountryData3(country) {
     ) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
     .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected); "finally" usually used for something that always needs to happen like hide a loading spinner (Or fade the container like here). NOTE: .finally() only works on promises
 }
-btn.addEventListener('click', function () {
-  getCountryData3('australia');
-});
+// btn.addEventListener('click', function () {
+//    getCountryData3('australia');
+// });
 
 ////////////// Exercise #1 ////////////
 
@@ -140,8 +140,8 @@ function whereAmI(lat, lng) {
     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
   )
     .then(res => {
-      if (!res) throw new Error("Can't get data");
-      console.log(res);
+      if (!res.ok) throw new Error(`Can't get data ${res.status}`);
+      //   console.log(res);
       return res.json();
     })
     // .then(data => console.log(data))
@@ -152,13 +152,15 @@ function whereAmI(lat, lng) {
       );
     })
     .then(res => {
-      if (!res) throw new Error('Country not found');
+      if (!res.ok) throw new Error(`Country not found ${res.status}`);
       return res.json();
     })
     .then(data => renderCountry(data[0]))
-    .catch(err => console.log(`sth went wrong ${err.message} ${err.status}`));
+    .catch(err => console.log(`sth went wrong ${err.message} ${err.status}`))
+    .finally(() => (countriesContainer.style.opacity = 1));
 }
 
-// whereAmI(52.508, 13.381);
-// whereAmI(19.037, 72.873);
+whereAmI(52.508, 13.381);
+whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
+whereAmI(23.933, 28.474);
