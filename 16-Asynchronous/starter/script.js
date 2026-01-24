@@ -210,4 +210,22 @@ wait(5000).then(res => console.log(res));
 const wait = function (sec) {
   return new Promise(resolve => setTimeout(resolve, sec * 1000));
 };
-wait(5).then(() => console.log('Done'));
+
+wait(1)
+  .then(() => {
+    console.log('1sec passed');
+    return wait(1);
+  }).then(() => {
+    console.log('2sec passed');
+    return wait(1);
+  }).then(() => {
+    console.log('3sec passed');
+    return wait(1);
+  }).then(() => {
+    console.log('4sec passed');
+    return wait(1);
+  }).then(() => {
+    console.log('5sec passed');
+    return wait(1);
+  })
+  .then(() => console.log("6sec passed"));
