@@ -133,7 +133,7 @@ function getCountryData3(country) {
 //    getCountryData3('australia');
 // });
 
-////////////// Exercise #1 ////////////
+/////////////////////////////////////// Exercise #1 ///////////////////////////////////////
 
 function whereAmI(lat, lng) {
   fetch(
@@ -164,3 +164,15 @@ whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
 whereAmI(23.933, 28.474);
+
+/////////////////////////////////////// Practice ///////////////////////////////////////
+
+//To prove that Microtask queue (were promise callback go) has priority to callback queue(where callbacks go)console.log('Start');
+
+setTimeout(() => console.log("time's up"), 0);
+Promise.resolve('Promise 1').then(res => console.log(res));
+Promise.resolve('Promise 2').then(res => {
+  for (let i = 0; i < 10000000000; i++) {}
+  console.log(res);
+});
+console.log('End');
