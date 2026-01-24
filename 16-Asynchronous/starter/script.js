@@ -129,12 +129,12 @@ function getCountryData3(country) {
     ) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
     .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected); "finally" usually used for something that always needs to happen like hide a loading spinner (Or fade the container like here). NOTE: .finally() only works on promises
 }
-// btn.addEventListener('click', function () {
-//    getCountryData3('australia');
-// });
+btn.addEventListener('click', function () {
+  getCountryData3('germany');
+});
 
 /////////////////////////////////////// Exercise #1 ///////////////////////////////////////
-
+/* 
 function whereAmI(lat, lng) {
   fetch(
     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
@@ -164,7 +164,7 @@ whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
 whereAmI(23.933, 28.474);
-
+ */
 /////////////////////////////////////// Practice ///////////////////////////////////////
 /* 
 //To prove that Microtask queue (were promise callback go) has priority to callback queue(where callbacks go)console.log('Start');
@@ -206,7 +206,7 @@ lotteryDraw.then(res => console.log(res)).catch(err => console.error(err));
 wait(5000).then(res => console.log(res));
  */
 // More simply and usefull way:
-
+/* 
 const wait = function (sec) {
   return new Promise(resolve => setTimeout(resolve, sec * 1000));
 };
@@ -229,3 +229,32 @@ wait(1)
     return wait(1);
   })
   .then(() => console.log("6sec passed"));
+ */
+
+navigator.geolocation.getCurrentPosition(
+  position => console.log(position),
+  err => console.error(err),
+);
+// Promisifying it:
+const getCurrentLoc = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(
+      position => resolve(position),
+      err => reject(err),
+    );
+  });
+};
+// More simple:
+const getCurrentLoc2 = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getCurrentLoc()
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+  
+getCurrentLoc2()
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
