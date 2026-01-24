@@ -196,7 +196,7 @@ lotteryDraw.then(res => console.log(res)).catch(err => console.error(err));
  */
 
 // Promisifying means to convert callback based asynchronous behavior to Promise based
-const wait = function (sec) {
+/* const wait = function (sec) {
   return new Promise(function (resolve) {
     console.log('timer Started');
 
@@ -204,3 +204,10 @@ const wait = function (sec) {
   });
 };
 wait(5000).then(res => console.log(res));
+ */
+// More simply and usefull way:
+
+const wait = function (sec) {
+  return new Promise(resolve => setTimeout(resolve, sec * 1000));
+};
+wait(5).then(() => console.log('Done'));
