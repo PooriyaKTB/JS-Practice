@@ -178,12 +178,12 @@ Promise.resolve('Promise 2').then(res => {
 console.log('End');
  */
 ////////////////////////////////// Creating Promise //////////////////////////////////
+/* 
+// Syntax: new Promise(Executer function(resolve function, reject function))
 
-// Promisifying means to convert callback based asynchronous behavior to Promise based
 const lotteryDraw = new Promise(function (resolve, reject) {
-  console.log("Plese Wait");
+  console.log('Plese Wait');
   setTimeout(function () {
-    
     if (Math.random() >= 0.5) {
       resolve('You Won');
     } else {
@@ -193,3 +193,14 @@ const lotteryDraw = new Promise(function (resolve, reject) {
 });
 
 lotteryDraw.then(res => console.log(res)).catch(err => console.error(err));
+ */
+
+// Promisifying means to convert callback based asynchronous behavior to Promise based
+const wait = function (sec) {
+  return new Promise(function (resolve) {
+    console.log('timer Started');
+
+    setTimeout(() => resolve('Done'), sec);
+  });
+};
+wait(5000).then(res => console.log(res));
