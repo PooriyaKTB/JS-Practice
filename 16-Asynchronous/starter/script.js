@@ -350,13 +350,32 @@ async function whereAmI(country) {
     const res = await fetch(
       `https://restcountries.com/v2/name/${dataGeo.countryCode}`,
     );
-        if (!resGeo.ok) throw new Error('sth went wrong with getting country');
+    if (!resGeo.ok) throw new Error('sth went wrong with getting country');
 
     const [data] = await res.json();
     renderCountry(data);
+    return `You are in ${dataGeo.city}, ${dataGeo.countryName}`;
   } catch (err) {
     console.log(err.message);
+    throw err; // to catch later if needed
   }
 }
 
-whereAmI('germany');
+// console.log(`1: Start`);
+// whereAmI()
+//   .then(res => console.log(`2: ${res}`))
+//   .catch(err => console.log(`2: ${err.message}`))
+//   .finally(() => console.log(`3: End`));
+
+
+// other way via IIFE (Immediately Invoked Function Expression)
+(async function () {
+  try {
+    console.log(`1: Start`);
+    const result = await whereAmI();
+    console.log(`2: ${result}`);
+  } catch (err) {
+    console.log(`2: ${err.message}`);
+  }
+  console.log(`3: End`);
+})();
