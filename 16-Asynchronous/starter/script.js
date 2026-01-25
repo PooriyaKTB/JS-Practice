@@ -129,9 +129,9 @@ function getCountryData3(country) {
     ) // Catch any errors that occur in any place in whole promis chain. (where the promise fulfilled, otherwise caatch handler cannot pick up error. so that we handel errors like 404 manually)
     .finally(() => (countriesContainer.style.opacity = 1)); /// Allways be called whatever happens with the promise (no matter if the promise is fullfilled or rejected); "finally" usually used for something that always needs to happen like hide a loading spinner (Or fade the container like here). NOTE: .finally() only works on promises
 }
-btn.addEventListener('click', function () {
-  getCountryData3('germany');
-});
+// btn.addEventListener('click', function () {
+//   getCountryData3('germany');
+// });
 
 /////////////////////////////////////// Exercise #1 ///////////////////////////////////////
 /* 
@@ -251,10 +251,86 @@ const getCurrentLoc2 = function () {
   });
 };
 
-getCurrentLoc()
-  .then(res => console.log(res))
-  .catch(err => console.error(err));
-  
-getCurrentLoc2()
-  .then(res => console.log(res))
-  .catch(err => console.error(err));
+// getCurrentLoc()
+//   .then(res => console.log(res))
+//   .catch(err => console.error(err));
+
+// getCurrentLoc2()
+//   .then(res => console.log(res))
+//   .catch(err => console.error(err));
+
+/* 
+function whereAmI() {
+  getCurrentLoc2()
+    .then(pos => {
+
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      return fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+      );
+    })
+
+    .then(res => {
+      if (!res.ok) throw new Error(`Can't get data ${res.status}`);
+      //   console.log(res);
+      return res.json();
+    })
+    // .then(data => console.log(data))
+    .then(data => {
+      console.log(`You are in ${data.city}, ${data.countryName}`);
+      return fetch(
+        `https://countries-api-836d.onrender.com/countries/name/${data.countryName}`,
+      );
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`Country not found ${res.status}`);
+      return res.json();
+    })
+    .then(data => renderCountry(data[0]))
+    .catch(err => console.log(`sth went wrong: ${err.message} ${err.status}`))
+    .finally(() => (countriesContainer.style.opacity = 1));
+}
+btn.addEventListener('click', whereAmI);
+ */
+
+/////////////////////////////////////// Exercise #2 ///////////////////////////////////////
+
+const wait = function (sec) {
+  return new Promise(resolve => setTimeout(resolve, sec * 1000));
+};
+
+const imgContainer = document.querySelector('.images');
+
+function createImage(imgPath) {
+  return new Promise(function (res, rej) {
+    const image = document.createElement('img');
+    image.src = imgPath;
+    image.addEventListener('load', () => {
+      imgContainer.appendChild(image);
+      res(image);
+    });
+    image.addEventListener('error', () => {
+      rej(new Error('Can not load image'));
+    });
+  });
+}
+
+let curImg;
+
+createImage('./img/img-1.jpg')
+  .then(el => {
+    curImg = el;
+    return wait(2);
+  })
+  .then(() => {
+    curImg.style.dispaly = 'none';
+    return createImage('./img/img-2.jpg');
+  })
+  .then(el => {
+    curImg = el;
+    return wait(2);
+  })
+  .then(() => curImg.style.dispaly = 'none')
+  .catch(err => console.log(err.message));
+// .catch(err => console.log(err.status));
