@@ -337,19 +337,26 @@ createImage('./img/img-1.jpg')
  */
 
 async function whereAmI(country) {
-  const myPos = await getCurrentLoc2();
-  const { latitude: lat, longitude: lng } = myPos.coords;
+  try {
+    const myPos = await getCurrentLoc2();
+    const { latitude: lat, longitude: lng } = myPos.coords;
 
-  const resGeo = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
-  );
-  const dataGeo = await resGeo.json();
+    const resGeo = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+    );
+    if (!resGeo.ok) throw new Error('sth went wrong with getting position');
+    const dataGeo = await resGeo.json();
 
-  const res = await fetch(
-    `https://restcountries.com/v2/name/${dataGeo.countryCode}`,
-  );
-  const [data] = await res.json();
-  renderCountry(data);
+    const res = await fetch(
+      `https://restcountries.com/v2/name/${dataGeo.countryCode}`,
+    );
+        if (!resGeo.ok) throw new Error('sth went wrong with getting country');
+
+    const [data] = await res.json();
+    renderCountry(data);
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 whereAmI('germany');
