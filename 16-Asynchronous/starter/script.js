@@ -324,13 +324,13 @@ createImage('./img/img-1.jpg')
     return wait(2);
   })
   .then(() => {
-    curImg.style.dispaly = 'none';
+    curImg.style.display = 'none';
     return createImage('./img/img-2.jpg');
   })
   .then(el => {
     curImg = el;
     return wait(2);
   })
-  .then(() => curImg.style.dispaly = 'none')
+  .then(() => curImg.style.display = 'none')
   .catch(err => console.log(err.message));
 // .catch(err => console.log(err.status));
