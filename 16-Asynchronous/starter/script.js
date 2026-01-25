@@ -24,7 +24,7 @@ function renderCountry(data, className = '') {
         </article>
         `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  //   countriesContainer.style.opacity = 1; // moved it into "finally"
+  countriesContainer.style.opacity = 1; // moved it into "finally"
 }
 
 function renderError(msg) {
@@ -231,10 +231,10 @@ wait(1)
   .then(() => console.log("6sec passed"));
  */
 
-navigator.geolocation.getCurrentPosition(
-  position => console.log(position),
-  err => console.error(err),
-);
+// navigator.geolocation.getCurrentPosition(
+//   position => console.log(position),
+//   err => console.error(err),
+// );
 // Promisifying it:
 const getCurrentLoc = function () {
   return new Promise(function (resolve, reject) {
@@ -295,7 +295,7 @@ btn.addEventListener('click', whereAmI);
  */
 
 /////////////////////////////////////// Exercise #2 ///////////////////////////////////////
-
+/* 
 const wait = function (sec) {
   return new Promise(resolve => setTimeout(resolve, sec * 1000));
 };
@@ -331,6 +331,25 @@ createImage('./img/img-1.jpg')
     curImg = el;
     return wait(2);
   })
-  .then(() => curImg.style.display = 'none')
-  .catch(err => console.log(err.message));
+  .then(() => (curImg.style.display = 'none'))
+  .catch(err => console.log(err));
 // .catch(err => console.log(err.status));
+ */
+
+async function whereAmI(country) {
+  const myPos = await getCurrentLoc2();
+  const { latitude: lat, longitude: lng } = myPos.coords;
+
+  const resGeo = await fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+  );
+  const dataGeo = await resGeo.json();
+
+  const res = await fetch(
+    `https://restcountries.com/v2/name/${dataGeo.countryCode}`,
+  );
+  const [data] = await res.json();
+  renderCountry(data);
+}
+
+whereAmI('germany');
