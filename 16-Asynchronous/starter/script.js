@@ -379,7 +379,7 @@ async function whereAmI(country) {
   }
   console.log(`3: End`);
 })();
- */
+*/
 Promise.race([
   Promise.resolve('1'),
   Promise.reject('error'),
@@ -411,3 +411,42 @@ Promise.any([
 ])
   .then(p => console.log(p))
   .catch(err => console.log(err));
+
+/////////////////////////////////////// Exercise #3 ///////////////////////////////////////
+
+const wait = function (sec) {
+  return new Promise(resolve => setTimeout(resolve, sec * 1000));
+};
+
+const imgContainer = document.querySelector('.images');
+
+function createImage(imgPath) {
+  return new Promise(function (res, rej) {
+    const image = document.createElement('img');
+    image.src = imgPath;
+    image.addEventListener('load', () => {
+      imgContainer.appendChild(image);
+      res(image);
+    });
+    image.addEventListener('error', () => {
+      rej(new Error('Can not load image'));
+    });
+  });
+}
+
+let curImg;
+
+(async function loadNPause() {
+  try {
+    const img = await createImage('./img/img-1.jpg');
+    curImg = img;
+    await wait(2);
+    curImg.style.display = 'none';
+    const img2 = await createImage('./img/img-2.jpdg');
+    curImg = img2;
+    await wait(2);
+    curImg.style.display = 'none';
+  } catch (err) {
+    console.log(err.message);
+  }
+})();
