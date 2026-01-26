@@ -367,8 +367,8 @@ async function whereAmI(country) {
 //   .catch(err => console.log(`2: ${err.message}`))
 //   .finally(() => console.log(`3: End`));
 
-
 // other way via IIFE (Immediately Invoked Function Expression)
+/* 
 (async function () {
   try {
     console.log(`1: Start`);
@@ -379,3 +379,35 @@ async function whereAmI(country) {
   }
   console.log(`3: End`);
 })();
+ */
+Promise.race([
+  Promise.resolve('1'),
+  Promise.reject('error'),
+  Promise.resolve('2'),
+])
+  .then(p => console.log(p))
+  .catch(err => console.log(err));
+
+Promise.all([
+  Promise.resolve('1'),
+  Promise.reject('error'),
+  Promise.resolve('2'),
+])
+  .then(p => console.log(p))
+  .catch(err => console.log(err));
+
+Promise.allSettled([
+  Promise.resolve('1'),
+  Promise.reject('error'),
+  Promise.resolve('2'),
+])
+  .then(p => console.log(p))
+  .catch(err => console.log(err));
+
+Promise.any([
+  Promise.resolve('1'),
+  Promise.reject('error'),
+  Promise.resolve('2'),
+])
+  .then(p => console.log(p))
+  .catch(err => console.log(err));
