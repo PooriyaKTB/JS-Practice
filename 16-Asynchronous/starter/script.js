@@ -435,7 +435,7 @@ function createImage(imgPath) {
 }
 
 let curImg;
-
+/* 
 (async function loadNPause() {
   try {
     const img = await createImage('./img/img-1.jpg');
@@ -450,3 +450,17 @@ let curImg;
     console.log(err.message);
   }
 })();
+ */
+ 
+async function loadAll(arr) {
+  try {
+    const imgs = arr.map(async img => await createImage(img));
+    const result = await Promise.all(imgs);
+    const check = result.forEach(img => img.classList.add('parallel'));
+    console.log('Done');
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
